@@ -5,16 +5,15 @@
         </div>
         <div class="x_content">
 
-            <form action="<?php echo base_url('user/edit_obat'); ?>" method="post"
-                class="form-horizontal form-label-left" novalidate>
+            <form action="<?= base_url('user/edit_obat');?>" method="post" class="form-horizontal form-label-left"
+                novalidate>
 
                 <div class="row justify-content-center pt-4" post>
                     <div class="col-2">
                         <label for="nama_obat" class="col-form-label">Nama Obat</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="nama_obat" name="nama_obat" class="form-control" required
-                            value="<?= $upd_obat->nama_obat?>">
+                        <input type="text" id="nama_obat" name="nama_obat" class="form-control">
                     </div>
                 </div>
 

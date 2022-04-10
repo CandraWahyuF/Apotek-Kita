@@ -126,6 +126,7 @@ class User extends CI_Controller
         // $this->Data_apotek->tambah_obat($arrKat);
         // redirect('user/lihat_obat');
     }
+    
     public function hapus_obat($id){
         $this->Data_apotek->hapus_obat($id);
         redirect('user/lihat_obat');
@@ -230,4 +231,52 @@ class User extends CI_Controller
         $this->Data_apotek->tambah_pemasok($arrKat);
         redirect('user/lihat_pemasok');
     }
-}
+
+    // method tabel penjualan
+        public function lihat_penjualan()
+    {
+        $data['title'] = 'Lihat Penjualan';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // queri pemanggilan tabel di DB
+         $data['penjualan'] = $this->Data_apotek->getDataApotek('tb_penjualan')->result();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/lihat_penjualan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    // hapus penjualan
+    public function hapus_penjualan($id)
+        {
+            $this->Data_apotek->hapus_penjualan($id);
+            redirect('user/lihat_penjualan');
+        }
+
+            // method tabel pembelian
+    public function lihat_pembelian()
+    {
+        $data['title'] = 'Lihat Pembelian';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // queri pemanggilan tabel di DB
+         $data['pembelian'] = $this->Data_apotek->getDataApotek('tb_pembelian')->result();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/lihat_pembelian', $data);
+        $this->load->view('templates/footer');
+    }
+
+    // hapus pembelian
+    public function hapus_pembelian($id)
+        {
+            $this->Data_apotek->hapus_pembelian($id);
+            redirect('user/lihat_pembelian');
+        }
+} 

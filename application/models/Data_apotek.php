@@ -33,4 +33,16 @@ class Data_apotek extends CI_Model
     public function tambah_pemasok($data){
         $this->db->insert('tb_pemasok', $data);
     }
+
+        // method hapus penjualan
+    public function hapus_penjualan($id){
+        $this->db->where('id_jual', $id);
+        $this->db->delete('tb_penjualan');
+    }
+
+            // method hapus penjualan
+    public function hapus_pembelian($id){
+        $this->db->where('id_beli', $id);
+        $this->db->delete('tb_penjualan');
+    }
 }

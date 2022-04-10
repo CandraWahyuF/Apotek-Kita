@@ -37,10 +37,10 @@
                             <td><?= $data->kedaluwarsa; ?></td>
                             <td><?= $data->h_jual; ?></td>
                             <td>
-                                <a href="<?= base_url('user/edit_obat/')?><?= $data->id?>"><button type="button"
+                                <a href="<?= base_url('user/edit_obat/'). $data->id?>"><button type="edit"
                                         class="sbtn btn-success"><i class="fas fa-edit"></i></button></a>
 
-                                <a href="<?= base_url('user/hapus_obat/')?><?= $data->id?>"><button type="delete"
+                                <a href="<?= base_url('user/hapus_obat/'). $data->id?>"><button type="delete"
                                         class="sbtn btn-danger"><i class="fas fa-trash"></i></button></a>
                             </td>
                         </tr>

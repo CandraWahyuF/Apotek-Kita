@@ -5,6 +5,7 @@
         </div>
         <div class="x_content">
 
+
             <form action="<?php echo base_url('user/tambah_obat'); ?>" method="post"
                 class="form-horizontal form-label-left" novalidate>
 
