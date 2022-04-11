@@ -1,4 +1,4 @@
-<?php
+<?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller
@@ -8,6 +8,8 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Data_apotek');
+        $this->load->library('form_validation');
+        $this->load->library('session');
     }
 
 
@@ -33,7 +35,7 @@ class User extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         // queri pemanggilan tabel di DB
-        $data['obat'] = $this->Data_apotek->getDataApotek('tb_obat')->result();
+        $data['obat'] = $this->Data_apotek->getDataApotek('tb_obat');
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -42,146 +44,7 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-        // method form tambah obat
-    public function form_obat()
-    {
-        $data['title'] = 'Tambah Obat';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
-        // queri pemanggilan tabel di DB
-        // $data['obat'] = $this->Data_apotek->getDataApotek('tb_obat')->result();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('user/form_obat', $data);
-        $this->load->view('templates/footer');
-    }
-
-         // method tambah Obat
-    public function tambah_obat()
-    {
-        $nama_obat = $this->input->post('nama_obat');
-        $penyimpanan = $this->input->post('penyimpanan');
-        $kategori = $this->input->post('kategori');
-        $stok = $this->input->post('stok');
-        $kedaluwarsa = $this->input->post('kedaluwarsa');
-        $h_beli = $this->input->post('harga_beli');
-        $h_jual = $this->input->post('harga_jual');
-        $nama_pemasok = $this->input->post('nama_pemasok');
-
-
-        $arrKat = array( 
-            'nama_obat' => $nama_obat,
-            'penyimpanan' => $penyimpanan,
-            'kategori' => $kategori,
-            'stok' => $stok,
-            'kedaluwarsa' => $kedaluwarsa,
-            'h_jual' => $h_jual,
-            'h_beli' => $h_beli,
-            'nama_pemasok' => $nama_pemasok
-        );
-
-        $this->Data_apotek->tambah_obat($arrKat);
-        redirect('user/lihat_obat');
-    }
-             // method edit Obat
-    public function edit_obat($id)
-    {
-        // template edit obat
-        $data['title'] = 'Edit Obat';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-        
-        $data['upd_obat'] = $this->Data_apotek->edit_obat($id);
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('user/edit_obat', $data);
-        $this->load->view('templates/footer');
-        
-        // $nama_obat = $this->input->post('nama_obat');
-        // $penyimpanan = $this->input->post('penyimpanan');
-        // $kategori = $this->input->post('kategori');
-        // $stok = $this->input->post('stok');
-        // $kedaluwarsa = $this->input->post('kedaluwarsa');
-        // $h_beli = $this->input->post('harga_beli');
-        // $h_jual = $this->input->post('harga_jual');
-        // $nama_pemasok = $this->input->post('nama_pemasok');
-
-
-        // $arrKat = array( 
-        //     'nama_obat' => $nama_obat,
-        //     'penyimpanan' => $penyimpanan,
-        //     'kategori' => $kategori,
-        //     'stok' => $stok,
-        //     'kedaluwarsa' => $kedaluwarsa,
-        //     'h_jual' => $h_jual,
-        //     'h_beli' => $h_beli,
-        //     'nama_pemasok' => $nama_pemasok
-        // );
-
-        // $this->Data_apotek->tambah_obat($arrKat);
-        // redirect('user/lihat_obat');
-    }
-    
-    public function hapus_obat($id){
-        $this->Data_apotek->hapus_obat($id);
-        redirect('user/lihat_obat');
-    }
-
-        // method lihat kategori
-    public function lihat_kategori()
-    {
-        $data['title'] = 'Lihat Kategori';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
-        // queri pemanggilan tabel di DB
-        $data['kategori'] = $this->Data_apotek->getDataApotek('tb_kategori')->result();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('user/lihat_kategori', $data);
-        $this->load->view('templates/footer');
-    }
-
-            // method form kategori
-    public function form_kategori()
-    {
-        $data['title'] = 'Tambah Kategori';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
-        // // queri pemanggilan tabel di DB
-        // $data['kategori'] = $this->Data_apotek->getDataApotek('tb_kategori')->result();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('user/form_kategori', $data);
-        $this->load->view('templates/footer');
-    }
-
-        // method tambah kategori
-    public function tambah_kategori()
-    {
-        $nama_kat = $this->input->post('nama_kategori');
-        $deskripsi = $this->input->post('deskripsi');
-
-        $arrKat = array( 
-            'nama_kat' => $nama_kat,
-            'desk_kat' => $deskripsi
-        );
-
-        $this->Data_apotek->tambah_kategori($arrKat);
-        redirect('user/lihat_kategori');
-    }
-
-            // method lihat pemasok
+        // method lihat pemasok
     public function lihat_pemasok()
     {
         $data['title'] = 'Lihat Pemasok';
@@ -189,7 +52,7 @@ class User extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         // queri pemanggilan tabel di DB
-        $data['pemasok'] = $this->Data_apotek->getDataApotek('tb_pemasok')->result();
+        $data['pemasok'] = $this->Data_apotek->getDataApotek('tb_pemasok');
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -198,49 +61,31 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-              // method form pemasok
-    public function form_pemasok()
+            // method lihat kategori
+    public function lihat_kategori()
     {
-        $data['title'] = 'Tambah Pemasok';
+        $data['title'] = 'Lihat Kategori';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
         // queri pemanggilan tabel di DB
-        // $data['pemasok'] = $this->Data_apotek->getDataApotek('tb_pemasok')->result();
+        $data['kategori'] = $this->Data_apotek->getDataApotek('tb_kategori');
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('user/form_pemasok', $data);
+        $this->load->view('user/lihat_kategori', $data);
         $this->load->view('templates/footer');
     }
-    
-     // method tambah kategori
-    public function tambah_pemasok()
+
+         // method lihat penjualan
+    public function lihat_penjualan()
     {
-        $nama_obat = $this->input->post('nama_obat');
-        $penyimpanan = $this->input->post('penyimpanan');
-        $telepon = $this->input->post('telepon');
-
-        $arrKat = array( 
-            'nama_obat' => $nama_obat,
-            'alamat_pemasok' => $penyimpanan,
-            'telepon_pemasok' => $telepon
-        );
-
-        $this->Data_apotek->tambah_pemasok($arrKat);
-        redirect('user/lihat_pemasok');
-    }
-
-    // method tabel penjualan
-        public function lihat_penjualan()
-    {
-        $data['title'] = 'Lihat Penjualan';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Tabel Penjualan Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         // queri pemanggilan tabel di DB
-         $data['penjualan'] = $this->Data_apotek->getDataApotek('tb_penjualan')->result();
+        $data['penjualan'] = $this->Data_apotek->getDataApotek('tb_penjualan');
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -249,22 +94,15 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    // hapus penjualan
-    public function hapus_penjualan($id)
-        {
-            $this->Data_apotek->hapus_penjualan($id);
-            redirect('user/lihat_penjualan');
-        }
-
-            // method tabel pembelian
+    
+         // method lihat pembelian
     public function lihat_pembelian()
     {
-        $data['title'] = 'Lihat Pembelian';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Tabel Pembelian Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         // queri pemanggilan tabel di DB
-         $data['pembelian'] = $this->Data_apotek->getDataApotek('tb_pembelian')->result();
+        $data['pembelian'] = $this->Data_apotek->getDataApotek('tb_pembelian');
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -273,10 +111,228 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    // hapus pembelian
-    public function hapus_pembelian($id)
+
+    // WILAYAH INPUT INPUT DATA
+
+        // method form pemasok
+    public function form_obat()
+    {
+        $data['title'] = 'Tambah Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama_obat', 'Nama Pemasok', 'required');
+        $this->form_validation->set_rules('penyimpanan', 'Penyimpanan', 'required');
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
+        $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
+        $this->form_validation->set_rules('kedaluwarsa', 'Kedaluwarsa', 'required');
+        $this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required|numeric');
+        $this->form_validation->set_rules('harga_beli', 'Harga Beli', 'required|numeric');
+        $this->form_validation->set_rules('nama_pemasok', 'Nama Pemasok', 'required');
+
+        if($this->form_validation->run() == FALSE)
         {
-            $this->Data_apotek->hapus_pembelian($id);
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/form_obat', $data);
+            $this->load->view('templates/footer');
+        }
+        else {
+            $this->Data_apotek->tambah_obat();
+            $this->session->set_flashdata('flash','ditambahkan');
+            redirect('user/lihat_obat');
+        }
+    }
+
+            // method form kategori
+    public function form_kategori()
+    {
+        $data['title'] = 'Tambah Kategori';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama_kategori', 'Nama Kategori', 'required');
+        $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/form_kategori', $data);
+            $this->load->view('templates/footer');
+        }
+        else {
+            $this->Data_apotek->tambah_kategori();
+            $this->session->set_flashdata('flash','ditambahkan');
+            redirect('user/lihat_kategori');
+        }
+    }
+
+            // method form pemasok
+    public function form_pemasok()
+    {
+        $data['title'] = 'Tambah Pemasok';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama_pemasok', 'Nama Pemasok', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('telepon', 'Telepon', 'required|numeric');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/form_pemasok', $data);
+            $this->load->view('templates/footer');
+        }
+        else {
+            $this->Data_apotek->tambah_pemasok();
+            $this->session->set_flashdata('flash','ditambahkan');
+            redirect('user/lihat_pemasok');
+        }
+    }
+
+
+    // form pembelian
+        public function form_pembelian()
+    {
+        $data['title'] = 'Tambah Pembelian dari Pemasok';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama_pemasok', 'Nama Pemasok', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('telepon', 'Telepon', 'required|numeric');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/form_pembelian', $data);
+            $this->load->view('templates/footer');
+        }
+        else {
+            $this->Data_apotek->tambah_pembelian();
+            $this->session->set_flashdata('flash','ditambahkan');
             redirect('user/lihat_pembelian');
         }
-} 
+    }
+
+
+    // WILAYAH EDIT EDIT DATA //
+
+        // edit obat 
+    public function edit_obat($id)
+    {
+        $data['title'] = 'Ubah Data Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['obat'] = $this->Data_apotek->getObat($id);
+
+
+        $this->form_validation->set_rules('nama_obat', 'Nama Pemasok', 'required');
+        $this->form_validation->set_rules('penyimpanan', 'Penyimpanan', 'required');
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
+        $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
+        $this->form_validation->set_rules('kedaluwarsa', 'Kedaluwarsa', 'required');
+        $this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required|numeric');
+        $this->form_validation->set_rules('harga_beli', 'Harga Beli', 'required|numeric');
+        $this->form_validation->set_rules('nama_pemasok', 'Nama Pemasok', 'required');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/edit_obat', $data);
+            $this->load->view('templates/footer');
+        }
+        else {
+            $this->Data_apotek->edit_obatan();
+            $this->session->set_flashdata('flash','diubah');
+            redirect('user/lihat_obat');
+        }
+    }
+    
+    // method ubah kategori
+    public function edit_kategori($id_kat)
+    {
+        $data['title'] = 'Ubah Kategori';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['kategori'] = $this->Data_apotek->getKategori($id_kat);
+
+
+        $this->form_validation->set_rules('nama_kategori', 'Nama Kategori', 'required');
+        $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/edit_kategori', $data);
+            $this->load->view('templates/footer');
+        }
+        else {
+            $this->Data_apotek->edit_kat();
+            $this->session->set_flashdata('flash','diubah');
+            redirect('user/lihat_kategori');
+        }
+    }
+
+    // method ubah pemasok
+    public function edit_pemasok($id_pemasok)
+    {
+        $data['title'] = 'Ubah Pemasok';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pemasok'] = $this->Data_apotek->getPemasok($id_pemasok);
+
+
+        $this->form_validation->set_rules('nama_pemasok', 'Nama Pemasok', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('telepon', 'Telepon', 'required');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/edit_pemasok', $data);
+            $this->load->view('templates/footer');
+        }
+        else {
+            $this->Data_apotek->edit_pmasok();
+            $this->session->set_flashdata('flash','diubah');
+            redirect('user/lihat_pemasok');
+        }
+    }
+
+    
+
+    // WILAYAH HAPUS HAPUS DATA
+
+        // method hapus data obat
+    public function hapus_obat($id)
+    {
+        $this->Data_apotek->hapus_obat($id);
+        $this->session->set_flashdata('flash', 'dihapus');
+        redirect('user/lihat_obat');
+    }
+
+    // method hapus data kategori
+    public function hapus_kategori($id_kat)
+    {
+        $this->Data_apotek->hapus_kat($id_kat);
+        $this->session->set_flashdata('flash', 'dihapus');
+        redirect('user/lihat_kategori');
+    }
+    
+    // method hapus data kategori
+    public function hapus_pemasok($id_pemasok)
+    {
+        $this->Data_apotek->hapus_pmasok($id_pemasok);
+        $this->session->set_flashdata('flash', 'dihapus');
+        redirect('user/lihat_pemasok');
+    }
+    
+}

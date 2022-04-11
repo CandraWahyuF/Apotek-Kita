@@ -5,6 +5,16 @@
             <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
         </div>
         <div class="card-body">
+            <!-- notifikasi data berhasil ditambahkan -->
+            <?php if ($this->session->flashdata('flash') ) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Data Obat <strong>Berhasil</strong> <?= $this->session->flashdata('flash'); ?>!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <?php endif; ?>
             <a href="<?php echo base_url('user/form_obat'); ?>"><button class="btn btn-success mb-3">
                     <i class="fas fa-plus"> Tambah Obat</i></button></a>
             <div class="table-responsive">
@@ -41,7 +51,8 @@
                                         class="sbtn btn-success"><i class="fas fa-edit"></i></button></a>
 
                                 <a href="<?= base_url('user/hapus_obat/'). $data->id?>"><button type="delete"
-                                        class="sbtn btn-danger"><i class="fas fa-trash"></i></button></a>
+                                        class="sbtn btn-danger" onclick="return confirm('Yakin?')"><i
+                                            class="fas fa-trash"></i></button></a>
                             </td>
                         </tr>
 

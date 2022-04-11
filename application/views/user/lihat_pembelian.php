@@ -34,11 +34,11 @@
                             <td><?= $data->tgl_beli; ?></td>
                             <td><?= $data->total; ?></td>
                             <td>
-                                <!-- <a href="<?= base_url('user/edit_obat/'). $data->id_beli?>"><button type="edit"
-                                        class="sbtn btn-success"><i class="fas fa-edit"></i></button></a> -->
+                                <a href="<?= base_url('user/edit_obat/'). $data->id_beli?>"><button type="edit"
+                                        class="sbtn btn-success"><i class="fas fa-edit"></i></button></a>
 
-                                <a href="<?= base_url('user/hapus_pembelian/'). $data->id_beli?>"><button type="delete"
-                                        class="sbtn btn-danger"><i class="fas fa-trash"></i></button></a>
+                                <!-- <a href="<?= base_url('user/hapus_pembelian/'). $data->id_beli?>"><button type="delete"
+                                        class="sbtn btn-danger"><i class="fas fa-trash"></i></button></a> -->
                             </td>
                         </tr>
 

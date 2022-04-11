@@ -6,14 +6,14 @@
         <div class="x_content">
 
             <form action="" method="post" class="form-horizontal form-label-left" novalidate>
-
+                <input type="hidden" name="id_pemasok" value="<?= $pemasok['id_pemasok']; ?>">
                 <div class="row justify-content-center pt-4" post>
                     <div class="col-2">
                         <label for="nama_pemasok" class="col-form-label">Nama Pemasok</label>
                     </div>
                     <div class="col-3">
                         <input type="text" id="nama_pemasok" name="nama_pemasok" class="form-control"
-                            value="<?= set_value('nama_pemasok')?>">
+                            value="<?= $pemasok['nama_pemasok']; ?>">
                         <?= form_error('nama_pemasok', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-3">
                         <input type="text" id="alamat" name="alamat" class="form-control"
-                            value="<?= set_value('alamat')?>">
+                            value="<?= $pemasok['alamat_pemasok']; ?>">
                         <?= form_error('alamat', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-3">
                         <input type="text" id="telepon" name="telepon" class="form-control"
-                            value="<?= set_value('telepon')?>">
+                            value="<?= $pemasok['telepon_pemasok']; ?>">
                         <?= form_error('telepon', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>

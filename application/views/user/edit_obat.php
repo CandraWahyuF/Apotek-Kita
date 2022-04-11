@@ -5,15 +5,17 @@
         </div>
         <div class="x_content">
 
-            <form action="<?= base_url('user/edit_obat');?>" method="post" class="form-horizontal form-label-left"
-                novalidate>
 
+            <form action="" method="post" class="form-horizontal form-label-left" novalidate>
+                <input type="hidden" name="id" value="<?= $obat['id']; ?>">
                 <div class="row justify-content-center pt-4" post>
                     <div class="col-2">
                         <label for="nama_obat" class="col-form-label">Nama Obat</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="nama_obat" name="nama_obat" class="form-control">
+                        <input type="text" id="nama_obat" name="nama_obat" class="form-control"
+                            value="<?= $obat['nama_obat']; ?>">
+                        <?= form_error('nama_obat', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
 
@@ -22,7 +24,9 @@
                         <label for="penyimpanan" class="col-form-label">Penyimpanan</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="penyimpanan" name="penyimpanan" class="form-control" required>
+                        <input type="text" id="penyimpanan" name="penyimpanan" class="form-control"
+                            value="<?= $obat['penyimpanan']; ?>">
+                        <?= form_error('penyimpanan', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
 
@@ -31,8 +35,9 @@
                         <label for="stok" class="col-form-label">Banyak Stok</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="stok" name="stok" class="form-control" required
+                        <input type="text" id="stok" name="stok" class="form-control" value="<?= $obat['stok']; ?>"
                             data-validate-minmax="0,1000">
+                        <?= form_error('stok', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
 
@@ -41,7 +46,9 @@
                         <label for="kategori" class="col-form-label">Kategori</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="kategori" name="kategori" class="form-control" required>
+                        <input type="text" id="kategori" name="kategori" class="form-control"
+                            value="<?= $obat['kategori']; ?>">
+                        <?= form_error('kategori', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
 
@@ -50,10 +57,12 @@
                         <label for="kedaluwarsa" class="col-form-label">Tanggal Kedaluwarsa</label>
                     </div>
                     <div class="col-3">
-                        <input type="date" id="kedaluwarsa" name="kedaluwarsa" class="form-control" required>
+                        <input type="date" id="kedaluwarsa" name="kedaluwarsa" class="form-control"
+                            value="<?= $obat['kedaluwarsa']; ?>">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
+                        <?= form_error('kedaluwarsa', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
 
@@ -62,8 +71,9 @@
                         <label for="harga_beli" class="col-form-label">Harga Beli (Rp)</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="harga_beli" name="harga_beli" class="form-control" required
-                            data-validate-minmax="10,1000000">
+                        <input type="text" id="harga_beli" name="harga_beli" class="form-control"
+                            value="<?= $obat['h_beli']; ?>" data-validate-minmax="10,1000000">
+                        <?= form_error('harga_beli', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
 
@@ -72,8 +82,9 @@
                         <label for="harga_jual" class="col-form-label">Harga Jual (Rp)</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="harga_jual" name="harga_jual" class="form-control" required
-                            data-validate-minmax="10,1000000">
+                        <input type="text" id="harga_jual" name="harga_jual" class="form-control"
+                            value="<?= $obat['h_jual']; ?>" data-validate-minmax="10,1000000">
+                        <?= form_error('harga_jual', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
 
@@ -82,7 +93,9 @@
                         <label for="nama_pemasok" class="col-form-label">Nama Pemasok</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="nama_pemasok" name="nama_pemasok" class="form-control" required>
+                        <input type="text" id="nama_pemasok" name="nama_pemasok" class="form-control"
+                            value="<?= $obat['nama_pemasok']; ?>">
+                        <?= form_error('nama_pemasok', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
 

@@ -8,7 +8,7 @@ class Auth extends CI_Controller {
         $this->load->library('form_validation');    
     }
 
-    // method login
+    // method login 
     public function index()
     {
         // kunci akses auth ketika sdh login
@@ -126,4 +126,5 @@ class Auth extends CI_Controller {
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Anda Telah Keluar Akun!</div>');
         redirect('auth');
     }
+
 }

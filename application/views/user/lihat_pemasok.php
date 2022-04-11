@@ -5,6 +5,17 @@
             <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
         </div>
         <div class="card-body">
+
+            <!-- notifikasi data berhasil ditambahkan -->
+            <?php if ($this->session->flashdata('flash') ) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Data Pemasok <strong>Berhasil</strong> <?= $this->session->flashdata('flash'); ?>!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php endif; ?>
+
             <a href="<?php echo base_url('user/form_pemasok'); ?>"><button class="btn btn-success mb-3">
                     <i class="fas fa-plus"> Tambah Pemasok</i></button></a>
             <div class="table-responsive">
@@ -29,15 +40,20 @@
                             <td><?= $data->alamat_pemasok; ?></td>
                             <td><?= $data->telepon_pemasok; ?></td>
                             <td>
-                                <button>EDIT</button>
-                                <button>HAPUS</button>
-                            </td>
-                        </tr>
+                                <a href="<?= base_url('user/edit_pemasok/'). $data->id_pemasok?>"><button type="edit"
+                                        class="sbtn btn-success"><i class="fas fa-edit"></i></button></a>
 
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                                <a href="<?= base_url('user/hapus_pemasok/'). $data->id_pemasok?>"><button type="delete"
+                                        class="sbtn btn-danger" onclick="return confirm('Yakin?')"><i
+                                            class="fas fa-trash"></i></button></a>
             </div>
+            </td>
+            </tr>
+
+            <?php endforeach; ?>
+            </tbody>
+            </table>
         </div>
     </div>
+</div>
 </div>
