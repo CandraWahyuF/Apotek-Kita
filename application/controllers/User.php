@@ -27,6 +27,61 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    // Tabel kedaluwarsa
+    public function tabel_kedaluwarsa()
+    {
+        $data['title'] = 'Tabel Kedaluwarsa';
+        $data['title1'] = 'Tabel Obat Akan Kedaluwarsa';
+        $data['title2'] = 'Tabel Obat Sudah Kedaluwarsa';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // queri pemanggilan tabel di DB
+        $data['obat'] = $this->Data_apotek->getDataApotek('tb_obat');
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/tabel_kedaluwarsa', $data);
+        $this->load->view('templates/footer');
+    }
+
+        // Tabel kedaluwarsa
+    public function tabel_stok()
+    {
+        $data['title'] = 'Tabel Stok Obat';
+        $data['title1'] = 'Tabel Stok Obat Akan Habis';
+        $data['title2'] = 'Tabel Stok Obat Sudah Habis';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // queri pemanggilan tabel di DB
+        $data['obat'] = $this->Data_apotek->getDataApotek('tb_obat');
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/tabel_stok', $data);
+        $this->load->view('templates/footer');
+    }
+
+            // Tabel kedaluwarsa
+    public function tabel_laporan()
+    {
+        $data['title'] = 'Tabel Laporan Bulanan';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // queri pemanggilan tabel di DB
+        // $data['obat'] = $this->Data_apotek->getDataApotek('tb_obat');
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/tabel_laporan', $data);
+        $this->load->view('templates/footer');
+    }
+
     // method lihat obat
     public function lihat_obat()
     {
@@ -219,6 +274,31 @@ class User extends CI_Controller
         }
     }
 
+        // form pembelian
+        public function form_penjualan()
+    {
+        $data['title'] = 'Tambah Penjualan';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama_pemasok', 'Nama Pemasok', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('telepon', 'Telepon', 'required|numeric');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/form_penjualan', $data);
+            $this->load->view('templates/footer');
+        }
+        else {
+            $this->Data_apotek->tambah_pembelian();
+            $this->session->set_flashdata('flash','ditambahkan');
+            redirect('user/lihat_penjualan');
+        }
+    }
+
 
     // WILAYAH EDIT EDIT DATA //
 
@@ -333,6 +413,66 @@ class User extends CI_Controller
         $this->Data_apotek->hapus_pmasok($id_pemasok);
         $this->session->set_flashdata('flash', 'dihapus');
         redirect('user/lihat_pemasok');
+    }
+
+    // export EXCEL
+    public function excel(){
+
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        
+        $data['obat'] = $this->Data_apotek->getDataApotek('tb_obat');
+        require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
+        require(APPPATH. 'PHPExcel-1.8/ClasLastsetLastModifiedByExAdmin07.php');
+
+        $object = new PHPExcel();
+        $object->getProperties()->setCreator("Can");
+        $object->getProperties()->setLastModifiedBy("Admin");
+        $object->getProperties()->setTitle("Laporan Lihat Obat");
+
+        $object->setActiveSheetIndex(0);
+        $object->getActiveSheet()->setCellValue('A1', 'No');
+        $object->getActiveSheet()->setCellValue('B1', 'Nama Obat');
+        $object->getActiveSheet()->setCellValue('C1', 'Penyimpanan');
+        $object->getActiveSheet()->setCellValue('D1', 'Kategori');
+        $object->getActiveSheet()->setCellValue('E1', 'Stok');
+        $object->getActiveSheet()->setCellValue('F1', 'Pemasok');
+        $object->getActiveSheet()->setCellValue('G1', 'Tanggal Kedaluwarsa');
+        $object->getActiveSheet()->setCellValue('H1', 'Harga Beli');
+        $object->getActiveSheet()->setCellValue('I1', 'Harga Jual');
+
+        $baris = 2;
+        $no = 1;
+
+        foreach ($data['obat'] as $ob) {
+            $object->getActiveSheet()->setCellValue('A'. $baris, $no++);
+            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->nama_obat);
+            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->penyimpanan);
+            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->kategori);
+            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->stok);
+            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->pemasok);
+            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->kedaluwarsa);
+            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->h_beli);
+            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->h_jual);
+
+            $baris++;
+        }
+
+        $filesname= "Lihat_obat".'.xlsx';
+        $object->getActiveSheet()->setTitle("Lihat Obat");
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetm1.sheet');
+        header('Content-Disposition: attachment;filename="'.$filesname.'"');
+        header('Cache-Control: Max-age=0');
+
+        ob_end_clean();
+        $writer=PHPExcel_IOFactory::createWriter($object,'Excel2007');
+        ob_end_clean();
+        $writer->save('php://output');
+
+        exit;
+
+
     }
     
 }

@@ -113,7 +113,7 @@
     <!-- BARIS KE 2 -->
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">
-            <a href="<?= base_url('user/lihat_kedaluwarsa')?>" class="text-decoration-none">
+            <a href="<?= base_url('user/tabel_kedaluwarsa')?>" class="text-decoration-none">
                 <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -131,7 +131,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <a href="<?= base_url('user/lihat_habis')?>" class="text-decoration-none">
+            <a href="<?= base_url('user/tabel_stok')?>" class="text-decoration-none">
                 <div class="card border-left-info shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -149,7 +149,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <a href="<?= base_url('user/lihat_laporan')?>" class="text-decoration-none">
+            <a href="<?= base_url('user/tabel_laporan')?>" class="text-decoration-none">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">

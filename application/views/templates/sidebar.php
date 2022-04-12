@@ -41,8 +41,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="<?= base_url('user/form_obat')?>">Tambah Obat</a>
                 <a class="collapse-item" href="<?= base_url('user/lihat_obat')?>">Lihat Obat</a>
-                <a class="collapse-item" href="cards.html">Obat Kadaluarsa</a>
-                <a class="collapse-item" href="cards.html">Obat Akan Habis</a>
+                <a class="collapse-item" href="<?= base_url('user/tabel_kedaluwarsa')?>">Obat Kadaluarsa</a>
+                <a class="collapse-item" href="<?= base_url('user/tabel_stok')?>">Obat Akan Habis</a>
             </div>
         </div>
     </li>
@@ -94,7 +94,7 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= base_url('user/tabel_laporan')?>">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Laporan</span></a>
     </li>
