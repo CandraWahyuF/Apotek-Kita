@@ -75,11 +75,11 @@
                             <td><?= $i++; ?></td>
                             <td><?= $data->nama_obat; ?></td>
                             <td><?= $data->penyimpanan; ?></td>
-                            <td><?= $data->nama_kategori; ?></td>
                             <td><?= $data->stok; ?></td>
                             <td><?= $data->nama_pemasok; ?></td>
                             <td><?= date('j F Y',strtotime($data->kedaluwarsa)); ?></td>
                             <td><?= $data->h_jual; ?></td>
+                            <td><?= $data->nama_kat; ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
