@@ -17,13 +17,14 @@ class Data_apotek extends CI_Model
         $data = [
             'nama_obat' => $this->input->post('nama_obat', true),
             'penyimpanan' => $this->input->post('penyimpanan', true),
-            'nama_kategori' => $this->input->post('kategori', true),
             'stok' => $this->input->post('stok', true),
+            'nama_kat' => $this->input->post('nama_kat', true),
             'kedaluwarsa' => $this->input->post('kedaluwarsa', true),
             'h_jual' => $this->input->post('harga_jual', true),
             'h_beli' => $this->input->post('harga_beli', true),
             'nama_pemasok' => $this->input->post('nama_pemasok', true),
-            
+           
+
         ];
 
         $this->db->insert('tb_obat', $data);
@@ -33,7 +34,7 @@ class Data_apotek extends CI_Model
     public function tambah_kategori(){
 
         $data = [
-            'nama_kategori' => $this->input->post('nama_kategori', true),
+            'nama_kat' => $this->input->post('nama_kategori', true),
             'desk_kat' => $this->input->post('deskripsi', true),
         ];
 
@@ -186,7 +187,7 @@ class Data_apotek extends CI_Model
         {
             foreach ($query as $row ) 
         {
-            $data[$row['nama_kategori']] = $row['nama_kategori'];
+            $data[$row['nama_kat']] = $row['nama_kat'];
         }
         }
         asort($data);
@@ -224,12 +225,12 @@ class Data_apotek extends CI_Model
         $data = [
             'nama_obat' => $this->input->post('nama_obat', true),
             'penyimpanan' => $this->input->post('penyimpanan', true),
-            'nama_kategori' => $this->input->post('kategori', true),
             'stok' => $this->input->post('stok', true),
             'kedaluwarsa' => $this->input->post('kedaluwarsa', true),
             'h_jual' => $this->input->post('harga_jual', true),
             'h_beli' => $this->input->post('harga_beli', true),
             'nama_pemasok' => $this->input->post('nama_pemasok', true),
+            'nama_kat' => $this->input->post('kategori', true),
         ];
 
         $this->db->where('id', $this->input->post('id'));
@@ -240,7 +241,7 @@ class Data_apotek extends CI_Model
     public function edit_kat(){
 
         $data = [
-            'nama_kategori' => $this->input->post('nama_kategori', true),
+            'nama_kat' => $this->input->post('nama_kategori', true),
             'desk_kat' => $this->input->post('deskripsi', true),
         ];
 
