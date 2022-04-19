@@ -39,7 +39,7 @@
                     ?>
                         <tr>
                             <td><?= $i++; ?></td>
-                            <td><?= $data->nama_kategori; ?></td>
+                            <td><?= $data->nama_kat; ?></td>
                             <td><?= $data->desk_kat; ?></td>
                             <td>
                                 <a href="<?= base_url('user/edit_kategori/'). $data->id_kat?>"><button type="edit"
