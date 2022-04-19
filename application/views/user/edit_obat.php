@@ -5,16 +5,16 @@
         </div>
         <div class="x_content">
 
-
+            <!-- <?php foreach($obat as $obat){ ?> -->
             <form action="" method="post" class="form-horizontal form-label-left" novalidate>
-                <input type="hidden" name="id" value="<?= $obat['id']; ?>">
+                <input type="hidden" name="id" value="<?= $obat->id ?>">
                 <div class="row justify-content-center pt-4" post>
                     <div class="col-2">
                         <label for="nama_obat" class="col-form-label">Nama Obat</label>
                     </div>
                     <div class="col-3">
                         <input type="text" id="nama_obat" name="nama_obat" class="form-control"
-                            value="<?= $obat['nama_obat']; ?>">
+                            value="<?= $obat->nama_obat ?>">
                         <?= form_error('nama_obat', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-3">
                         <input type="text" id="penyimpanan" name="penyimpanan" class="form-control"
-                            value="<?= $obat['penyimpanan']; ?>">
+                            value="<?= $obat->penyimpanan ?>">
                         <?= form_error('penyimpanan', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         <label for="stok" class="col-form-label">Banyak Stok</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="stok" name="stok" class="form-control" value="<?= $obat['stok']; ?>"
+                        <input type="text" id="stok" name="stok" class="form-control" value="<?= $obat->stok ?>"
                             data-validate-minmax="0,1000">
                         <?= form_error('stok', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
@@ -46,8 +46,18 @@
                         <label for="kategori" class="col-form-label">Kategori</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="kategori" name="kategori" class="form-control"
-                            value="<?= $obat['kategori']; ?>">
+                        <select name="nama_kategori" id="nama_kategori" class="select2_single form-control"
+                            tabindex="-1">
+
+                            <?php foreach ($obat as $gk) : ?>
+                            <?php if($gk == $obat->nama_kategori) :?>
+                            <option value="<?= $gk ?>" selected> <?php echo $gk ?> </option>
+                            <?php else : ?>
+                            <option value="<?= $gk ?>"> <?php echo $gk ?> </option>
+                            <?php endif; ?>
+                            <?php  endforeach; ?>
+
+                        </select>
                         <?= form_error('kategori', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -58,7 +68,7 @@
                     </div>
                     <div class="col-3">
                         <input type="date" id="kedaluwarsa" name="kedaluwarsa" class="form-control"
-                            value="<?= $obat['kedaluwarsa']; ?>">
+                            value="<?= $obat->kedaluwarsa ?>">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -72,7 +82,7 @@
                     </div>
                     <div class="col-3">
                         <input type="text" id="harga_beli" name="harga_beli" class="form-control"
-                            value="<?= $obat['h_beli']; ?>" data-validate-minmax="10,1000000">
+                            value="<?= $obat->h_beli ?>" data-validate-minmax="10,1000000">
                         <?= form_error('harga_beli', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -83,7 +93,7 @@
                     </div>
                     <div class="col-3">
                         <input type="text" id="harga_jual" name="harga_jual" class="form-control"
-                            value="<?= $obat['h_jual']; ?>" data-validate-minmax="10,1000000">
+                            value="<?= $obat->h_jual ?>" data-validate-minmax="10,1000000">
                         <?= form_error('harga_jual', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -93,8 +103,15 @@
                         <label for="nama_pemasok" class="col-form-label">Nama Pemasok</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="nama_pemasok" name="nama_pemasok" class="form-control"
-                            value="<?= $obat['nama_pemasok']; ?>">
+                        <select name="nama_pemasok" id="nama_pemasok" class="select2_single form-control" tabindex="-1">
+                            <?php foreach ($obat as $gp) : ?>
+                            <?php if($gp == $obat->nama_pemasok) :?>
+                            <option value="<?= $gp ?>" selected> <?php echo $gp ?> </option>
+                            <?php else : ?>
+                            <option value="<?= $gp ?>"> <?php echo $gp ?> </option>
+                            <?php endif; ?>
+                            <?php  endforeach; ?>
+                        </select>
                         <?= form_error('nama_pemasok', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -109,6 +126,7 @@
                     </div>
                 </div>
             </form>
+            <!-- <?php } ?> -->
         </div>
     </div>
 </div>

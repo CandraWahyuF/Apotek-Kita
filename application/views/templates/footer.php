@@ -49,11 +49,25 @@
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets/');?>js/sb-admin-2.min.js"></script>
 
+
+<!-- Download File -->
+<!-- <script>
+$(document).ready(function() {
+    $('dataTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+});
+</script> -->
+<!-- End Download File -->
+
 <!-- Data Tables -->
 <script src="<?= base_url('assets/');?>vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url('assets/');?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="<?= base_url('assets/');?>js/demo/datatables-demo.js"></script>
-<script src="<?= base_url('assets/');?>vendor/datatables/buttons.bootstrap4.min.js"></script>
+<!-- <script src="<?= base_url('assets/');?>vendor/datatables/buttons.bootstrap4.min.js"></script>
 <script src="<?= base_url('assets/');?>vendor/datatables/buttons.colVis.min.js"></script>
 <script src="<?= base_url('assets/');?>vendor/datatables/buttons.html5.min.js"></script>
 <script src="<?= base_url('assets/');?>vendor/datatables/buttons.print.min.js"></script>
@@ -62,7 +76,7 @@
 <script src="<?= base_url('assets/');?>vendor/datatables/jquery-3.5.1.js"></script>
 <script src="<?= base_url('assets/');?>vendor/datatables/jszip.min.js"></script>
 <script src="<?= base_url('assets/');?>vendor/datatables/pdfmake.min.js"></script>
-<script src="<?= base_url('assets/');?>vendor/datatables/vfs_fonts.js"></script>
+<script src="<?= base_url('assets/');?>vendor/datatables/vfs_fonts.js"></script> -->
 </body>
 
 </html>

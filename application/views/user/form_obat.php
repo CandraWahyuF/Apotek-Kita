@@ -48,6 +48,13 @@
                     <div class="col-3">
                         <input type="text" id="kategori" name="kategori" class="form-control"
                             value="<?= set_value('kategori')?>">
+                        <!-- <select name="nama_kategori" id="nama_kategori" class="select2_single form-control"
+                            tabindex="-1" required="required">
+                            <option selected="true" value="" disabled></option>
+                            <?php foreach($get_kat as $gk){ ?>
+                            <option value="<?php echo $gk; ?>"><?php echo $gk; ?></option>
+                            <?php  }?>
+                        </select> -->
                         <?= form_error('kategori', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -95,6 +102,13 @@
                     <div class="col-3">
                         <input type="text" id="nama_pemasok" name="nama_pemasok" class="form-control"
                             value="<?= set_value('nama_pemasok')?>">
+                        <!-- <select name="nama_pemasok" id="nama_pemasok" class="select2_single form-control" tabindex="-1"
+                            required="required">
+                            <option selected="true" value="" disabled></option>
+                            <?php foreach($get_pemasok as $gs){ ?>
+                            <option value="<?php echo $gs; ?>"><?php echo $gs; ?></option>
+                            <?php  }?>
+                        </select> -->
                         <?= form_error('nama_pemasok', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
+            <h6 class="m-0 font-weight-bold text-dark"><?= $title; ?></h6>
         </div>
         <div class="card-body">
             <!-- notifikasi data berhasil ditambahkan -->
@@ -25,7 +25,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="<?= base_url('user/excel'); ?>">EXCEL</a>
-                    <a class="dropdown-item" href="#">PDF</a>
+                    <!-- <a class="dropdown-item" href="#">PDF</a> -->
                 </div>
             </div>
 
@@ -53,10 +53,10 @@
                             <td><?= $i++; ?></td>
                             <td><?= $data->nama_obat; ?></td>
                             <td><?= $data->penyimpanan; ?></td>
-                            <td><?= $data->kategori; ?></td>
+                            <td><?= $data->nama_kategori; ?></td>
                             <td><?= $data->stok; ?></td>
                             <td><?= $data->nama_pemasok; ?></td>
-                            <td><?= $data->kedaluwarsa; ?></td>
+                            <td><?= date('j F Y',strtotime($data->kedaluwarsa)); ?></td>
                             <td><?= $data->h_jual; ?></td>
                             <td>
                                 <a href="<?= base_url('user/edit_obat/'). $data->id?>"><button type="edit"

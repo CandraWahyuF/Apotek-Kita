@@ -2,10 +2,13 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><?= $title1; ?></h6>
+            <h6 class="m-0 font-weight-bold text-dark"><?= $title1; ?></h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
+                <div class="alert alert-danger" role="alert">
+                    List Obat dengan Sisa Stok <strong>Kurang dari 10</strong>!
+                </div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -22,16 +25,16 @@
                     <tbody>
                         <?php
                         $i = 1; 
-                        foreach ($obat as $data) : 
+                        foreach ($almstok as $data) : 
                     ?>
                         <tr>
                             <td><?= $i++; ?></td>
                             <td><?= $data->nama_obat; ?></td>
                             <td><?= $data->penyimpanan; ?></td>
-                            <td><?= $data->kategori; ?></td>
+                            <td><?= $data->nama_kategori; ?></td>
                             <td><?= $data->stok; ?></td>
                             <td><?= $data->nama_pemasok; ?></td>
-                            <td><?= $data->kedaluwarsa; ?></td>
+                            <td><?= date('j F Y',strtotime($data->kedaluwarsa)); ?></td>
                             <td><?= $data->h_jual; ?></td>
                         </tr>
                         <?php endforeach; ?>
@@ -66,16 +69,16 @@
                     <tbody>
                         <?php
                         $i = 1; 
-                        foreach ($obat as $data) : 
+                        foreach ($habis_stok as $data) : 
                     ?>
                         <tr>
                             <td><?= $i++; ?></td>
                             <td><?= $data->nama_obat; ?></td>
                             <td><?= $data->penyimpanan; ?></td>
-                            <td><?= $data->kategori; ?></td>
+                            <td><?= $data->nama_kategori; ?></td>
                             <td><?= $data->stok; ?></td>
                             <td><?= $data->nama_pemasok; ?></td>
-                            <td><?= $data->kedaluwarsa; ?></td>
+                            <td><?= date('j F Y',strtotime($data->kedaluwarsa)); ?></td>
                             <td><?= $data->h_jual; ?></td>
                         </tr>
                         <?php endforeach; ?>

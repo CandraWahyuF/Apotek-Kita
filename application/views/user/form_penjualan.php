@@ -10,51 +10,21 @@
 
                     <div class="x_title">
                         <h2>Tambah Penjualan Baru</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-
-                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
 
 
-                        <form action="<?php echo base_url(). 'example/add_purchase'; ?>" method="post"
-                            class="form-horizontal form-label-left" novalidate>
+                        <form action="#" method="post" class="form-horizontal form-label-left" novalidate>
 
-                            <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pemasok">Nama
-                                    Pembeli</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select name="nama_pemasok" id="nama_pemasok"
-                                        class="select2_single form-control nama_pemasok" tabindex="-1"
-                                        required="required">
-                                        <option selected="true" value="" disabled></option>
-                                        <?php foreach($get_sup as $gs){ ?>
-                                        <option value="<?php echo $gs; ?>"><?php echo $gs; ?></option>
-                                        <?php  }?>
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nama Pembeli</label>
+                                <input type="email" class="form-control col-8" id="nama_pembeli">
                             </div>
-
-                            <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_beli">Tanggal
-                                    Transaksi</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class='input-group date' id='myDatepicker2'>
-                                        <input type="text" name="tgl_beli" id="tgl_beli" class="form-control"
-                                            required="required">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="form-group justify-content-center">
+                                <label for="exampleInputPassword1">Tanggal Transaksi</label>
+                                <input type="date" class="form-control col-8" id="tanggal_beli">
                             </div>
-
-
 
                             <table id="purchase" class="table table-bordered">
                                 <thead>

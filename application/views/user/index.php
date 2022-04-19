@@ -5,28 +5,23 @@
     <div class="row tile_count justify-content-center" style="text-align:center">
         <div class=" col-md-2 col-sm-4 col-xs-6 tile_stats_count p-1 m-1" style="font-size:20px;">
             <span class="count_top"><i class="fa fa-medkit"></i> Total Obat</span>
-            <div class="count" style="text-align: center;">50</div>
-            <!-- <div class="count"><?php echo $stockobat ?></div> -->
+            <div class="count" style="text-align: ;"><?php echo $sumObat ?></div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-1 m-1" style="font-size:20px;">
             <span class="count_top"><i class="fa fa-plus-square"></i> Total Kategori</span>
-            <div class="count" style="text-align: center;">5</div>
-            <!-- <div class="count"><?php echo $stockkat ?></div> -->
+            <div class="count" style="text-align: ;"><?php echo $sumKat ?></div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-1 m-1" style="font-size:20px;">
             <span class="count_top"><i class="fa fa-users"></i> Total Pemasok</span>
-            <div class="count" style="text-align: center;">5</div>
-            <!-- <div class="count"><?php echo $sup ?></div> -->
+            <div class="count" style="text-align: ;"><?php echo $sumPemasok ?></div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-1 m-1" style="font-size:20px;">
             <span class="count_top"><i class="fa fa-edit"></i> Total Penjualan</span>
-            <div class="count" style="text-align: center;">150K</div>
-            <!-- <div class="count"><?php echo ($totinv/1000) ?>k</div> -->
+            <div class="count" style="text-align: ;"><?php echo ($sumJual/1000) ?>k</div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-1 m-1" style="font-size:20px;">
             <span class="count_top"><i class="fa fa-edit"></i> Total Pembelian</span>
-            <div class="count" style="text-align: center;">100k</div>
-            <!-- <div class="count"><?php echo ($totpur/1000) ?>k</div> -->
+            <div class="count" style="text-align: ;"><?php echo ($sumBeli/1000) ?>k</div>
         </div>
     </div>
     <!-- /Header Keterangan -->
@@ -80,7 +75,7 @@
                                 <div class="text-lg-start font-weight-bold text-info text-uppercase mb-1">
                                     Pemasok
                                 </div>
-                                <div class="text-sm-start text-gray-80">Menambahkan pemasok</div>
+                                <div class="text-sm-start text-gray-80">Menambahkan <br> pemasok</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fa fa-users fa-2x text-gray-300"></i>

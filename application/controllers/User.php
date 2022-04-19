@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use LDAP\Result;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller
@@ -10,6 +13,13 @@ class User extends CI_Controller
         $this->load->model('Data_apotek');
         $this->load->library('form_validation');
         $this->load->library('session');
+
+        $data['habis'] = $this->Data_apotek->countstock();
+        $data['expired'] = $this->Data_apotek->countexp();
+        $data['hampir_habis'] = $this->Data_apotek->hampir_habis();
+        $data['hampir_exp'] = $this->Data_apotek->hampir_kadal();
+        $this->load->view('templates/topbar', $data, true);
+
     }
 
 
@@ -20,6 +30,12 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
+        $data['sumObat'] = $this->Data_apotek->total_obat();
+        $data['sumKat'] = $this->Data_apotek->total_kategori();
+        $data['sumPemasok'] = $this->Data_apotek->total_pemasok();
+        $data['sumJual'] = $this->Data_apotek->total_jual();
+        $data['sumBeli'] = $this->Data_apotek->total_beli();
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -27,12 +43,18 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+
+
     // Tabel kedaluwarsa
     public function tabel_kedaluwarsa()
     {
         $data['title'] = 'Tabel Kedaluwarsa';
         $data['title1'] = 'Tabel Obat Akan Kedaluwarsa';
         $data['title2'] = 'Tabel Obat Sudah Kedaluwarsa';
+
+        $data['table_almostexp'] = $this->Data_apotek->almostexp()->result();
+        $data['table_exp'] = $this->Data_apotek->expired()->result();
+
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -46,12 +68,17 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-        // Tabel kedaluwarsa
+        // Tabel stok
     public function tabel_stok()
     {
         $data['title'] = 'Tabel Stok Obat';
         $data['title1'] = 'Tabel Stok Obat Akan Habis';
         $data['title2'] = 'Tabel Stok Obat Sudah Habis';
+
+
+        $data['habis_stok'] = $this->Data_apotek->habis_stok()->result();
+        $data['almstok'] = $this->Data_apotek->almoststok()->result();
+
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -115,7 +142,7 @@ class User extends CI_Controller
         $this->load->view('user/lihat_pemasok', $data);
         $this->load->view('templates/footer');
     }
-
+ 
             // method lihat kategori
     public function lihat_kategori()
     {
@@ -174,6 +201,9 @@ class User extends CI_Controller
     {
         $data['title'] = 'Tambah Obat';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['get_kat'] = $this->Data_apotek->get_kategori();
+        $data['get_pemasok'] = $this->Data_apotek->get_pemasok();
 
         $this->form_validation->set_rules('nama_obat', 'Nama Pemasok', 'required');
         $this->form_validation->set_rules('penyimpanan', 'Penyimpanan', 'required');
@@ -309,6 +339,9 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['obat'] = $this->Data_apotek->getObat($id);
 
+        $data['get_kat'] = $this->Data_apotek->get_kategori();
+        $data['get_pemasok'] = $this->Data_apotek->get_pemasok();
+        // $data['obat_edit'] = $this->Data_apotek->edit_data_obat('tb_obat');
 
         $this->form_validation->set_rules('nama_obat', 'Nama Pemasok', 'required');
         $this->form_validation->set_rules('penyimpanan', 'Penyimpanan', 'required');
@@ -421,58 +454,108 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
         
-        $data['obat'] = $this->Data_apotek->getDataApotek('tb_obat');
-        require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
-        require(APPPATH. 'PHPExcel-1.8/ClasLastsetLastModifiedByExAdmin07.php');
+        $data = $this->Data_apotek->getDataApotek('tb_obat');
 
-        $object = new PHPExcel();
-        $object->getProperties()->setCreator("Can");
-        $object->getProperties()->setLastModifiedBy("Admin");
-        $object->getProperties()->setTitle("Laporan Lihat Obat");
+        // $data = $this->Data_apotek-->getDataApotek();
 
-        $object->setActiveSheetIndex(0);
-        $object->getActiveSheet()->setCellValue('A1', 'No');
-        $object->getActiveSheet()->setCellValue('B1', 'Nama Obat');
-        $object->getActiveSheet()->setCellValue('C1', 'Penyimpanan');
-        $object->getActiveSheet()->setCellValue('D1', 'Kategori');
-        $object->getActiveSheet()->setCellValue('E1', 'Stok');
-        $object->getActiveSheet()->setCellValue('F1', 'Pemasok');
-        $object->getActiveSheet()->setCellValue('G1', 'Tanggal Kedaluwarsa');
-        $object->getActiveSheet()->setCellValue('H1', 'Harga Beli');
-        $object->getActiveSheet()->setCellValue('I1', 'Harga Jual');
+        include_once APPPATH.'/third_party/xlsxwriter.class.php';
+        ini_set('display_errors', 0);
+        ini_set('log_errors', 1);
+        error_reporting(E_ALL & ~E_NOTICE);
 
-        $baris = 2;
+        $filename = "report-".date('d-m-Y-H-i-s').".xlsx";
+        header('Content-disposition: attachment; filename="'.XLSXWriter::sanitize_filename($filename).'"');
+        header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        header('Content-Transfer-Encoding: binary');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+
+        $styles = array('widths'=>[3,20,30,40], 'font'=>'Arial','font-size'=>10,'font-style'=>'bold', 'fill'=>'#eee', 'halign'=>'center', 'border'=>'left,right,top,bottom');
+        $styles2 = array( ['font'=>'Arial','font-size'=>10,'font-style'=>'bold', 'fill'=>'#eee', 'halign'=>'left', 'border'=>'left,right,top,bottom','fill'=>'#ffc'],['fill'=>'#fcf'],['fill'=>'#ccf'],['fill'=>'#cff'],);
+
+        $header = array(
+            'nama_obat'=>'varchar',
+            'penyimpanan'=>'varchar',
+            'nama_kategori'=>'varchar',
+            'stok'=>'integer',
+            'kedaluwarsa'=>'date',
+            'h_jual'=>'integer',
+            'h_beli'=>'integer',
+            'nama_pemasok'=>'varchar',
+        );
+
+        $writer = new XLSXWriter();
+        $writer->setAuthor('Can');
+
+        $writer->writeSheetHeader('Sheet1', $header, $styles);
         $no = 1;
-
-        foreach ($data['obat'] as $ob) {
-            $object->getActiveSheet()->setCellValue('A'. $baris, $no++);
-            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->nama_obat);
-            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->penyimpanan);
-            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->kategori);
-            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->stok);
-            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->pemasok);
-            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->kedaluwarsa);
-            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->h_beli);
-            $object->getActiveSheet()->setCellValue('B'. $baris, $ob->h_jual);
-
-            $baris++;
+        foreach($data as $row){
+            $writer->writeSheetRow('Sheet1', [
+                $no, 
+                $row['nama_obat'], 
+                $row['penyimpanan'],
+                $row['nama_kategori'],
+                $row['stok'],
+                $row['kedaluwarsa'],
+                $row['h_jual'],
+                $row['h_beli'],
+                $row['nama_pemasok']
+            ], $styles2);
+            $no++;
         }
+        $writer->writeToStdOut();
 
-        $filesname= "Lihat_obat".'.xlsx';
-        $object->getActiveSheet()->setTitle("Lihat Obat");
+        // header("Content-type: application/vnd-ms-excel");
+        // header("Content-Disposition: attachment; filename= lihat-obat.xls");
+        // require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
+        // require(APPPATH. 'PHPExcel-1.8/ClasLastsetLastModifiedByExAdmin07.php');
 
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetm1.sheet');
-        header('Content-Disposition: attachment;filename="'.$filesname.'"');
-        header('Cache-Control: Max-age=0');
+        // $object = new PHPExcel();
+        // // $object->getProperties()->setCreator("Can");
+        // // $object->getProperties()->setLastModifiedBy("Admin");
+        // // $object->getProperties()->setTitle("Laporan Lihat Obat");
 
-        ob_end_clean();
-        $writer=PHPExcel_IOFactory::createWriter($object,'Excel2007');
-        ob_end_clean();
-        $writer->save('php://output');
+        // $object->setActiveSheetIndex(0);
+        // $object->getActiveSheet()->setCellValue('A1', 'No');
+        // $object->getActiveSheet()->setCellValue('B1', 'Nama Obat');
+        // $object->getActiveSheet()->setCellValue('C1', 'Penyimpanan');
+        // $object->getActiveSheet()->setCellValue('D1', 'Kategori');
+        // $object->getActiveSheet()->setCellValue('E1', 'Stok');
+        // $object->getActiveSheet()->setCellValue('F1', 'Pemasok');
+        // $object->getActiveSheet()->setCellValue('G1', 'Tanggal Kedaluwarsa');
+        // $object->getActiveSheet()->setCellValue('H1', 'Harga Beli');
+        // $object->getActiveSheet()->setCellValue('I1', 'Harga Jual');
 
-        exit;
+        // $baris = 2;
+        // $no = 1;
 
+        // foreach ($data['obat'] as $ob) {
+        //     $object->getActiveSheet()->setCellValue('A'. $baris, $no++);
+        //     $object->getActiveSheet()->setCellValue('B'. $baris, $ob->nama_obat);
+        //     $object->getActiveSheet()->setCellValue('B'. $baris, $ob->penyimpanan);
+        //     $object->getActiveSheet()->setCellValue('B'. $baris, $ob->kategori);
+        //     $object->getActiveSheet()->setCellValue('B'. $baris, $ob->stok);
+        //     $object->getActiveSheet()->setCellValue('B'. $baris, $ob->pemasok);
+        //     $object->getActiveSheet()->setCellValue('B'. $baris, $ob->kedaluwarsa);
+        //     $object->getActiveSheet()->setCellValue('B'. $baris, $ob->h_beli);
+        //     $object->getActiveSheet()->setCellValue('B'. $baris, $ob->h_jual);
 
+        //     $baris++;
+        // }
+
+        // $filesname= "Lihat_obat".'.xlsx';
+        // $object->getActiveSheet()->setTitle("Lihat Obat");
+
+        // header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetm1.sheet');
+        // header('Content-Disposition: attachment;filename="'.$filesname.'"');
+        // header('Cache-Control: Max-age=0');
+
+        // ob_end_clean();
+        // $writer=PHPExcel_IOFactory::createWriter($object,'Excel2007');
+        // ob_end_clean();
+        // $writer->save('php://output');
+
+        // exit;
     }
     
 }
