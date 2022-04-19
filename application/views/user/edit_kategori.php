@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-3">
                         <input type="text" id="nama_kategori" name="nama_kategori" class="form-control"
-                            value="<?= $kategori['nama_kategori']; ?>">
+                            value="<?= $kategori['nama_kat']; ?>">
                         <?= form_error('nama_kategori', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
 
