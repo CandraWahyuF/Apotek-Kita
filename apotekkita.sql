@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Apr 2022 pada 10.19
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 8.0.3
+-- Generation Time: Apr 20, 2022 at 12:47 AM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_kategori`
+-- Table structure for table `tb_kategori`
 --
 
 CREATE TABLE `tb_kategori` (
@@ -34,55 +34,41 @@ CREATE TABLE `tb_kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_kategori`
+-- Dumping data for table `tb_kategori`
 --
 
 INSERT INTO `tb_kategori` (`id_kat`, `nama_kat`, `desk_kat`) VALUES
-(1, 'Antibiotik', 'Obat untuk mengatasi infeksi bakteri'),
-(2, 'Antipiretik', 'Obat untuk mengatasi demam dan nyeri'),
-(3, 'Antiradang', 'Obat untuk mengurangi peradangan, meredakan nyeri, dan menurunkan demam'),
-(11, 'Anti Nyamuk', 'Obat untuk membunuh nyamuk'),
-(13, 'zzz', 'zzz'),
-(14, 'abc', 'abc'),
-(15, 'notif', 'coba ada notif ini'),
-(16, 'notif 2', 'coba close notif'),
-(17, 'notif 3 ', 'masih gabisa ilang');
+(31, 'Obat Keras Gan', 'ini obat');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_obat`
+-- Table structure for table `tb_obat`
 --
 
 CREATE TABLE `tb_obat` (
   `id` int(11) NOT NULL,
   `nama_obat` varchar(128) NOT NULL,
   `penyimpanan` varchar(128) NOT NULL,
-  `kategori` varchar(128) NOT NULL,
   `stok` int(11) NOT NULL,
   `kedaluwarsa` date NOT NULL,
   `h_jual` int(11) NOT NULL,
   `h_beli` int(11) NOT NULL,
-  `nama_pemasok` varchar(128) NOT NULL
+  `nama_pemasok` varchar(128) NOT NULL,
+  `nama_kat` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_obat`
+-- Dumping data for table `tb_obat`
 --
 
-INSERT INTO `tb_obat` (`id`, `nama_obat`, `penyimpanan`, `kategori`, `stok`, `kedaluwarsa`, `h_jual`, `h_beli`, `nama_pemasok`) VALUES
-(14, 'Promag', 'Rak 1', 'Obat maag', 10, '2022-04-10', 1500, 2000, 'Pemasok 1'),
-(15, 'Paramex', 'Rak 2', 'Obat Sakit Kepala', 10, '2022-04-16', 2500, 2000, 'Pemasok 1'),
-(17, 'Bodrex', 'Rak 2', 'Obat Flu', 4, '2022-04-10', 3000, 2500, 'Pemasok 1'),
-(30, 'aaa', 'aaa', 'aaa', 0, '2022-04-11', 2, 1, 'aaa'),
-(31, 'bb', 'bb', 'bb', 3, '2022-04-11', 3, 3, 'bb'),
-(32, 'cc', 'cc', 'cc', 33, '2022-04-02', 33, 13, 'cc'),
-(33, 'Pertamax', 'Jerigen 1', 'Sirup', 4, '2022-04-11', 15000, 12750, 'SPBU kiri');
+INSERT INTO `tb_obat` (`id`, `nama_obat`, `penyimpanan`, `stok`, `kedaluwarsa`, `h_jual`, `h_beli`, `nama_pemasok`, `nama_kat`) VALUES
+(38, 'AntiBiotik', 'Gudang', 30000, '2022-04-05', 2020, 32020, 'Kimia Farma', 'Obat Keras Gan');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pemasok`
+-- Table structure for table `tb_pemasok`
 --
 
 CREATE TABLE `tb_pemasok` (
@@ -93,22 +79,16 @@ CREATE TABLE `tb_pemasok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_pemasok`
+-- Dumping data for table `tb_pemasok`
 --
 
 INSERT INTO `tb_pemasok` (`id_pemasok`, `nama_pemasok`, `alamat_pemasok`, `telepon_pemasok`) VALUES
-(1, 'Pemasok 1', 'Jl. Pemasok 1', 111),
-(2, 'Pemasok 2', 'Jl. Pemasok 2', 222),
-(3, 'Pemasok 3', 'Jl. Pemasok 3', 333),
-(4, 'Pemasok 4', 'Jl. Pemasok 4', 444),
-(7, 'Pemasok 5', 'Jl. Pemosok 5', 555),
-(11, 'abc', 'abc', 321),
-(12, 'a', 'a', 1);
+(14, 'Kimia Farma', 'Lampung Selatan', 80808);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pembelian`
+-- Table structure for table `tb_pembelian`
 --
 
 CREATE TABLE `tb_pembelian` (
@@ -124,7 +104,7 @@ CREATE TABLE `tb_pembelian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_pembelian`
+-- Dumping data for table `tb_pembelian`
 --
 
 INSERT INTO `tb_pembelian` (`id_beli`, `koderef`, `nama_obat`, `h_beli`, `banyak`, `subtotal`, `nama_pemasok`, `tgl_beli`, `total`) VALUES
@@ -133,7 +113,7 @@ INSERT INTO `tb_pembelian` (`id_beli`, `koderef`, `nama_obat`, `h_beli`, `banyak
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_penjualan`
+-- Table structure for table `tb_penjualan`
 --
 
 CREATE TABLE `tb_penjualan` (
@@ -149,7 +129,7 @@ CREATE TABLE `tb_penjualan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_penjualan`
+-- Dumping data for table `tb_penjualan`
 --
 
 INSERT INTO `tb_penjualan` (`id_jual`, `koderef`, `nama_obat`, `h_beli`, `banyak`, `subtotal`, `nama_pembeli`, `tgl_beli`, `total`) VALUES
@@ -158,7 +138,7 @@ INSERT INTO `tb_penjualan` (`id_jual`, `koderef`, `nama_obat`, `h_beli`, `banyak
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -173,7 +153,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
@@ -183,7 +163,7 @@ INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_a
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_role`
+-- Table structure for table `user_role`
 --
 
 CREATE TABLE `user_role` (
@@ -192,7 +172,7 @@ CREATE TABLE `user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user_role`
+-- Dumping data for table `user_role`
 --
 
 INSERT INTO `user_role` (`id`, `role`) VALUES
@@ -204,92 +184,108 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 --
 
 --
--- Indeks untuk tabel `tb_kategori`
+-- Indexes for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
-  ADD PRIMARY KEY (`id_kat`);
+  ADD PRIMARY KEY (`id_kat`),
+  ADD UNIQUE KEY `nama_kat` (`nama_kat`);
 
 --
--- Indeks untuk tabel `tb_obat`
+-- Indexes for table `tb_obat`
 --
 ALTER TABLE `tb_obat`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_kat` (`nama_kat`),
+  ADD KEY `nama_kat` (`nama_kat`),
+  ADD KEY `nama_pemasok` (`nama_pemasok`);
 
 --
--- Indeks untuk tabel `tb_pemasok`
+-- Indexes for table `tb_pemasok`
 --
 ALTER TABLE `tb_pemasok`
-  ADD PRIMARY KEY (`id_pemasok`);
+  ADD PRIMARY KEY (`id_pemasok`),
+  ADD KEY `nama_pemasok` (`nama_pemasok`);
 
 --
--- Indeks untuk tabel `tb_pembelian`
+-- Indexes for table `tb_pembelian`
 --
 ALTER TABLE `tb_pembelian`
   ADD PRIMARY KEY (`id_beli`);
 
 --
--- Indeks untuk tabel `tb_penjualan`
+-- Indexes for table `tb_penjualan`
 --
 ALTER TABLE `tb_penjualan`
   ADD PRIMARY KEY (`id_jual`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user_role`
+-- Indexes for table `user_role`
 --
 ALTER TABLE `user_role`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_kategori`
+-- AUTO_INCREMENT for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
-  MODIFY `id_kat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_kat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_obat`
+-- AUTO_INCREMENT for table `tb_obat`
 --
 ALTER TABLE `tb_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_pemasok`
+-- AUTO_INCREMENT for table `tb_pemasok`
 --
 ALTER TABLE `tb_pemasok`
-  MODIFY `id_pemasok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_pemasok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_pembelian`
+-- AUTO_INCREMENT for table `tb_pembelian`
 --
 ALTER TABLE `tb_pembelian`
   MODIFY `id_beli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_penjualan`
+-- AUTO_INCREMENT for table `tb_penjualan`
 --
 ALTER TABLE `tb_penjualan`
   MODIFY `id_jual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `user_role`
+-- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tb_obat`
+--
+ALTER TABLE `tb_obat`
+  ADD CONSTRAINT `tb_obat_ibfk_1` FOREIGN KEY (`nama_kat`) REFERENCES `tb_kategori` (`nama_kat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_obat_ibfk_2` FOREIGN KEY (`nama_pemasok`) REFERENCES `tb_pemasok` (`nama_pemasok`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
