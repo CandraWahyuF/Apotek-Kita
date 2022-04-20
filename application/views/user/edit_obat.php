@@ -44,11 +44,14 @@
                         <label for="nama_kategori" class="col-form-label">Nama Kategori</label>
                     </div>
                     <div class="col-3">
-                        <select type="text" name="nama_kat" id="nama_kat" class="form-control"
-                            value="<?= $obat['nama_kat']; ?>">
-                            <?php foreach($get_kat as $gk){ ?>
+                        <select type="text" name="nama_kat" id="nama_kat" class="form-control">
+                            <?php foreach($get_kat as $gk) :?>
+                            <?php if ( $gk == $obat['nama_kat']) :?>
+                            <option value=" <?php echo $gk; ?>" selected><?php echo $gk; ?></option>
+                            <?php else :  ?>
                             <option value="<?php echo $gk; ?>"><?php echo $gk; ?></option>
-                            <?php  }?>
+                            <?php endif; ?>
+                            <?php  endforeach;?>
                         </select>
                         <?= form_error('nama_kat', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
@@ -92,11 +95,14 @@
                         <label for="nama_pemasok" class="col-form-label">Nama Pemasok</label>
                     </div>
                     <div class="col-3">
-                        <select type="text" name="nama_pemasok" id="nama_pemasok" class="form-control"
-                            value="<?= $obat['nama_pemasok']; ?>">
-                            <?php foreach($get_pemasok as $gs){ ?>
-                            <option value="<?php echo $gs; ?>"><?php echo $gs; ?></option>
-                            <?php  }?>
+                        <select type="text" name="nama_pemasok" id="nama_pemasok" class="form-control">
+                            <?php foreach($get_pemasok as $gp) :?>
+                            <?php if ( $gp == $obat['nama_pemasok']) :?>
+                            <option value="<?php echo $gp; ?>" selected><?php echo $gp; ?></option>
+                            <?php else :  ?>
+                            <option value="<?php echo $gp; ?>"><?php echo $gp; ?></option>
+                            <?php endif; ?>
+                            <?php  endforeach;?>
                         </select>
                         <?= form_error('nama_pemasok', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
