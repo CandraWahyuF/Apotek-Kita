@@ -43,17 +43,17 @@
 
                 <div class="row justify-content-center pt-2">
                     <div class="col-2">
-                        <label for="nama_kategori" class="col-form-label">Nama Kategori</label>
+                        <label for="nama_kat" class="col-form-label">Nama Kategori</label>
                     </div>
                     <div class="col-3">
-                     
+
                         <select name="nama_kat" id="nama_kat" class="select2_single form-control" tabindex="-1"
                             required="required">
                             <option selected="true" value="" disabled></option>
                             <?php foreach($get_kat as $gk){ ?>
                             <option value="<?php echo $gk; ?>"><?php echo $gk; ?></option>
                             <?php  }?>
-                        </select> 
+                        </select>
                         <?= form_error('nama_kat', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                         <label for="nama_pemasok" class="col-form-label">Nama Pemasok</label>
                     </div>
                     <div class="col-3">
-                       <!--  <input type="text" id="nama_pemasok" name="nama_pemasok" class="form-control"
+                        <!--  <input type="text" id="nama_pemasok" name="nama_pemasok" class="form-control"
                             value="<?= set_value('nama_pemasok')?>">-->
                         <select name="nama_pemasok" id="nama_pemasok" class="select2_single form-control" tabindex="-1"
                             required="required">
@@ -109,7 +109,7 @@
                             <?php foreach($get_pemasok as $gs){ ?>
                             <option value="<?php echo $gs; ?>"><?php echo $gs; ?></option>
                             <?php  }?>
-                        </select> 
+                        </select>
                         <?= form_error('nama_pemasok', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>

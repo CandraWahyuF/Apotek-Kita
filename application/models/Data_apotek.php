@@ -230,7 +230,7 @@ class Data_apotek extends CI_Model
             'h_jual' => $this->input->post('harga_jual', true),
             'h_beli' => $this->input->post('harga_beli', true),
             'nama_pemasok' => $this->input->post('nama_pemasok', true),
-            'nama_kat' => $this->input->post('kategori', true),
+            'nama_kat' => $this->input->post('nama_kat', true),
         ];
 
         $this->db->where('id', $this->input->post('id'));
