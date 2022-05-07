@@ -6,10 +6,10 @@
         <div class="x_content">
 
             <form action="" method="post" class="form-horizontal form-label-left" novalidate>
-
+                <input type="hidden" name="id" id="id" value="<?= $obat['id']; ?>">
                 <div class="row justify-content-center pt-4" post>
                     <div class="col-2">
-                        <label for="id" class="col-form-label">Nama Obat</label>
+                        <label for="nama_obat" class="col-form-label">Nama Obat</label>
                     </div>
                     <div class="col-3">
                         <input type="text" id="nama_obat" name="nama_obat" class="form-control"
@@ -41,7 +41,7 @@
 
                 <div class="row justify-content-center pt-2">
                     <div class="col-2">
-                        <label for="nama_kategori" class="col-form-label">Nama Kategori</label>
+                        <label for="nama_kat" class="col-form-label">Nama Kategori</label>
                     </div>
                     <div class="col-3">
                         <select type="text" name="nama_kat" id="nama_kat" class="form-control">

@@ -345,8 +345,8 @@ class User extends CI_Controller
 
         $this->form_validation->set_rules('nama_obat', 'Nama Pemasok', 'required');
         $this->form_validation->set_rules('penyimpanan', 'Penyimpanan', 'required');
-        $this->form_validation->set_rules('nama_kat', 'Kategori', 'required');
         $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
+        $this->form_validation->set_rules('nama_kat', 'Kategori', 'required');
         $this->form_validation->set_rules('kedaluwarsa', 'Kedaluwarsa', 'required');
         $this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required|numeric');
         $this->form_validation->set_rules('harga_beli', 'Harga Beli', 'required|numeric');
