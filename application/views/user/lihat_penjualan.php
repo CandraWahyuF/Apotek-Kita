@@ -8,9 +8,9 @@
             <a href="<?php echo base_url('user/form_penjualan'); ?>"><button class="btn btn-success mb-3">
                     <i class="fas fa-plus"> Tambah Penjualan</i></button></a>
 
-        <div class="dropdown d-inline">
-                <button class="btn btn-warning dropdown-toggle mb-3" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-expanded="false">
+            <div class="dropdown d-inline">
+                <button class="btn btn-warning dropdown-toggle mb-3" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-expanded="false">
                     Export File
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

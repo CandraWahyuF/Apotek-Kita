@@ -8,69 +8,197 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
 
-                    <div class="x_title">
-                        <h2>Tambah Penjualan Baru</h2>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
+                    <form action="<?php echo base_url() . 'user/form_penjualan'; ?>" method="post"
+                        class="form-horizontal form-label-left" novalidate>
 
-
-                        <form action="#" method="post" class="form-horizontal form-label-left" novalidate>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nama Pembeli</label>
-                                <input type="email" class="form-control col-8" id="nama_pembeli">
+                        <div class="row justify-content-center pt-4" post>
+                            <div class="col-2">
+                                <label for="nama_pembeli" class="col-form-label">Nama Pembeli</label>
                             </div>
-                            <div class="form-group justify-content-center">
-                                <label for="exampleInputPassword1">Tanggal Transaksi</label>
-                                <input type="date" class="form-control col-8" id="tanggal_beli">
+                            <div class="col-3">
+                                <input type="text" id="nama_pembeli" name="nama_pembeli" class="form-control">
+                                <?= form_error('nama_pembeli', '<small class="text-danger pl-3">' ,'</small>'); ?>
                             </div>
+                        </div>
 
-                            <table id="purchase" class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: center">Obat yang dibeli</th>
-                                        <th style="text-align: center">Stok</th>
-                                        <th style="text-align: center">Unit</th>
-                                        <th style="text-align: center">Harga</th>
-                                        <th style="text-align: center">Banyak</th>
-
-                                        <th style="text-align: center">Subtotal</th>
-                                        <th style="text-align: center">Aksi</th>
-
-                                    </tr>
-                                </thead>
-
-                                <tfoot>
-                                    <tr>
-                                        <td style="text-align:right; vertical-align: middle" colspan="5">
-                                            <b>Grandtotal</b>
-                                        </td>
-                                        <td>
-                                            <input id="grandtotal" name="grandtotal" type="text"
-                                                class="form-control grandtotal" readonly>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-
-
-                            <div class="ln_solid"></div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <a href="<?php echo base_url('example/table_invoice') ?>"><button type="button"
-                                            class="btn btn-danger">Batal</button></a>
-                                    <button id='addpurchase' class="btn btn-info" type="button"><span
-                                            class="fa fa-plus"></span>
-                                        Tambah Produk</button>
-                                    <button id="send" type="submit" class="btn btn-success">Simpan</button>
-
-                                </div>
+                        <div class="row justify-content-center pt-2 mb-4">
+                            <div class="col-2">
+                                <label for="tgl_beli" class="col-form-label">Tanggal Pembelian</label>
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-3">
+                                <input type="date" id="tgl_beli" name="tgl_beli" class="form-control">
+                                <span class=" input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                <?= form_error('tgl_beli', '<small class="text-danger pl-3">' ,'</small>'); ?>
+                            </div>
+                        </div>
+
+
+
+                        <table id="penjualan" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center">Obat yang dibeli</th>
+                                    <th style="text-align: center">Stok</th>
+                                    <th style="text-align: center">Kategori</th>
+                                    <th style="text-align: center">Harga</th>
+                                    <th style="text-align: center">Banyak</th>
+
+                                    <th style="text-align: center">Subtotal</th>
+                                    <th style="text-align: center">Aksi</th>
+
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <tr>
+                                    <td style="text-align:right; vertical-align: middle" colspan="5">
+                                        <b>Grandtotal</b>
+                                    </td>
+                                    <td>
+                                        <input id="grandtotal" name="grandtotal" type="text"
+                                            class="form-control grandtotal" readonly>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <a href="<?php echo base_url('user/lihat_penjualan') ?>"><button type="button"
+                                        class="btn btn-danger">Batal</button></a>
+                                <button id='addpenjualan' class="btn btn-info" type="button"><span
+                                        class="fa fa-plus"></span>
+                                    Tambah Produk</button>
+                                <button id="send" type="submit" class="btn btn-success">Simpan</button>
+
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
+
+<script type="text/javascript">
+const addpenjualan = document.querySelector("#addpenjualan");
+var penjualan = $('#penjualan').DataTable({
+    "paging": false,
+    "ordering": false,
+    "info": false,
+    "searching": false,
+});
+
+
+var counter = 1;
+
+addpenjualan.onclick = function(event) {
+    penjualan.row.add([
+        '<select required="required" style="width:100%;" class="form-control nama_obat" id="nama_obat' +
+        counter + '" name="nama_obat[]" data-stok="#stok' + counter + '" data-nama_kat="#nama_kat' +
+        counter + '" data-h_beli="#h_beli' + counter +
+        '"><option selected="true" value="" disabled ></option><?php foreach ($get_med as $gm) { ?><option value="<?php echo $gm; ?>"><?php echo $gm; ?></option><?php  } ?></select>',
+        '<input id="stok' + counter + '" name="stok[]" class="form-control stok" readonly >',
+        '<input id="nama_kat' + counter + '" name="nama_kat[]" class="form-control" readonly>',
+        '<input id="h_beli' + counter +
+        '" name="h_beli[]" class="form-control h_beli" readonly>',
+        '<input type="number" id="banyak' + counter +
+        '" name="banyak[]" class="form-control banyak" required="required">',
+        '<input id="subtotal' + counter +
+        '" name="subtotal[]" class="form-control subtotal" readonly>',
+        '<button id="removeproduk" class="btn btn-danger btn-sm" type="button"><span class="fa fa-trash"></span> Hapus</button>',
+    ]).draw(false);
+
+    var myOpt = [];
+    $("select").each(function() {
+        myOpt.push($(this).val());
+    });
+    $("select").each(function() {
+        $(this).find("option").prop('hidden', false);
+        var sel = $(this);
+        $.each(myOpt, function(key, value) {
+            if ((value != "") && (value != sel.val())) {
+                sel.find("option").filter('[value="' + value + '"]').prop('hidden', true);
+            }
+        });
+    });
+
+    counter++;
+}
+
+$('#penjualan').on("click", "#removeproduk", function() {
+    console.log($(this).parent());
+    penjualan.row($(this).parents('tr')).remove().draw(false);
+    updateTotal();
+});
+
+
+$('#penjualan').on('change', '.nama_obat', function() {
+    var $select = $(this);
+    var nama_obat = $select.val();
+
+    $.ajax({
+        type: "POST",
+        url: "<?php echo base_url('user/product') ?>",
+        dataType: "JSON",
+        data: {
+            nama_obat: nama_obat
+        },
+        cache: false,
+        success: function(data) {
+            $.each(data, function(nama_obat, stok, nama_kat, h_beli) {
+                $($select.data('stok')).val(data.stok);
+                $($select.data('nama_kat')).val(data.nama_kat);
+                $($select.data('h_beli')).val(data.h_beli);
+            });
+        }
+    });
+
+});
+
+$('#penjualan').on('change', '.banyak', function() {
+    updateSubtotalp();
+});
+
+function updateSubtotalp() {
+
+    $(".banyak").each(function() {
+        var $row = $(this).closest('tr');
+        var unitStock = parseInt($row.find('.stok').val());
+        var unitCount = parseInt($row.find('.banyak').val());
+
+
+        if (unitCount > unitStock) {
+            $row.find('.banyak').val(unitStock);
+            updateSubtotalp();
+
+        } else if (unitCount < 0) {
+            $row.find('.banyak').val(0);
+            updateSubtotalp();
+        } else {
+            var Sub = parseInt(($row.find('.h_beli').val()) * unitCount);
+            $row.find('.subtotal').val(Sub);
+            updateTotal();
+
+
+        }
+    });
+}
+
+function updateTotal() {
+    var grandtotal = 0;
+    $('.subtotal').each(function() {
+        grandtotal += parseInt($(this).val());
+    });
+    $('#grandtotal').val(grandtotal);
+}
+</script>
