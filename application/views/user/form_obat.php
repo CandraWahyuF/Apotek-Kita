@@ -101,8 +101,7 @@
                         <label for="nama_pemasok" class="col-form-label">Nama Pemasok</label>
                     </div>
                     <div class="col-3">
-                        <!--  <input type="text" id="nama_pemasok" name="nama_pemasok" class="form-control"
-                            value="<?= set_value('nama_pemasok')?>">-->
+                        value="<?= set_value('nama_pemasok')?>">-->
                         <select name="nama_pemasok" id="nama_pemasok" class="select2_single form-control" tabindex="-1"
                             required="required">
                             <option selected="true" value="" disabled></option>

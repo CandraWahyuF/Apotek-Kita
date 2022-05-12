@@ -228,8 +228,8 @@ class Data_apotek extends CI_Model
             'stok' => $this->input->post('stok', true),
             'nama_kat' => $this->input->post('nama_kat', true),
             'kedaluwarsa' => $this->input->post('kedaluwarsa', true),
-            'h_jual' => $this->input->post('harga_jual', true),
-            'h_beli' => $this->input->post('harga_beli', true),
+            'h_jual' => $this->input->post('h_jual', true),
+            'h_beli' => $this->input->post('h_beli', true),
             'nama_pemasok' => $this->input->post('nama_pemasok', true),
         ];
 
@@ -291,4 +291,83 @@ class Data_apotek extends CI_Model
         $this->db->where('id_beli', $id);
         $this->db->delete('tb_penjualan');
     }
+
+    // TRASAKSI
+    function getmedbysupplier($nama_pemasok){
+        $hasil=$this->db->query("SELECT * FROM tb_obat WHERE nama_pemasok='$nama_pemasok'");
+        return $hasil->result();
+    }
+
+    
+    function get_product($nama_obat)
+    {   $hasil = array();
+        $hsl=$this->db->query("SELECT * FROM tb_obat WHERE nama_obat='$nama_obat'");
+        if($hsl->num_rows()>0){
+            foreach ($hsl->result() as $data) {
+                $hasil=array(
+                    'nama_obat' => $data->nama_obat,
+                    'stok' => $data->stok,
+                    'nama_kat' => $data->nama_kat,
+                    'h_jual' => $data->h_jual,
+                    'h_beli' => $data->h_beli,
+                    
+                    );
+            }
+        }
+        return $hasil;
+    }
+
+    function get_medicine()
+    {
+        $data = array();
+        $query = $this->db->get('tb_obat')->result_array();
+
+        if( is_array($query) && count ($query) > 0 )
+        {
+        foreach ($query as $row ) 
+        {
+          $data[$row['nama_obat']] = $row['nama_obat'];
+        }
+        }
+        asort($data);
+        return $data;
+    }
+
+    
+    // TAMBAH PENJUALAN
+    function tambah_penjualan(){
+		 
+			$nama_pembeli = $this->input->post('nama_pembeli');
+			$tgl_beli = date("Y-m-d",strtotime($this->input->post('tgl_beli')));
+			$grandtotal = $this->input->post('grandtotal');
+			$ref = generateRandomString();
+			$nama_obat = $this->input->post('nama_obat');
+			$h_beli = $this->input->post('h_beli');
+			$banyak = $this->input->post('banyak');
+			$subtotal = $this->input->post('subtotal');
+
+		foreach($nama_obat as $key=>$val){
+		   
+		$data[] = array(
+            
+				'nama_pembeli' => $nama_pembeli,
+				'tgl_beli' => $tgl_beli,
+				'grandtotal' => $grandtotal,
+				'ref' => $ref,
+				'nama_obat' => $val,
+				'h_beli' => $h_beli[$key],
+				'banyak' => $banyak[$key],
+				'subtotal' => $subtotal[$key],
+				
+				);
+
+		$this->db->set('stok', 'stok-'.$banyak[$key], FALSE);
+	    $this->db->where('nama_obat', $val);
+	    $updated = $this->db->update('tb_obat');
+		
+		}
+		
+		$this->db->insert_batch('tb_penjualan', $data);
+	}
+
 }

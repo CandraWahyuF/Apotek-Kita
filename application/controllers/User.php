@@ -3,6 +3,7 @@
 use LDAP\Result;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once 'noRef.php';
 
 class User extends CI_Controller
 {
@@ -285,6 +286,9 @@ class User extends CI_Controller
         $data['title'] = 'Tambah Pembelian dari Pemasok';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
+        $data['get_pemasok'] = $this->Data_apotek->get_pemasok();
+        $data['get_med'] = $this->Data_apotek->get_medicine();
+
         $this->form_validation->set_rules('nama_pemasok', 'Nama Pemasok', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
         $this->form_validation->set_rules('telepon', 'Telepon', 'required|numeric');
@@ -304,15 +308,20 @@ class User extends CI_Controller
         }
     }
 
-        // form pembelian
-        public function form_penjualan()
+        // form penjualan
+    public function form_penjualan()
     {
         $data['title'] = 'Tambah Penjualan';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $this->form_validation->set_rules('nama_pemasok', 'Nama Pemasok', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('telepon', 'Telepon', 'required|numeric');
+        $data['get_med'] = $this->Data_apotek->get_medicine();
+        $data['get_pemasok'] = $this->Data_apotek->get_pemasok();
+        $data['get_kat'] = $this->Data_apotek->get_kategori();
+
+        $this->form_validation->set_rules('nama_pembeli', 'Nama Pembeli', 'required');
+        $this->form_validation->set_rules('tgl_beli', 'Tanggal Beli', 'required');
+        $this->form_validation->set_rules('nama_obat', 'Nama Obat', 'required');
+        $this->form_validation->set_rules('banyak', 'banyak', 'required');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -323,7 +332,8 @@ class User extends CI_Controller
             $this->load->view('templates/footer');
         }
         else {
-            $this->Data_apotek->tambah_pembelian();
+            var_dump("tes");die;
+            $this->Data_apotek->tambah_penjualan();
             $this->session->set_flashdata('flash','ditambahkan');
             redirect('user/lihat_penjualan');
         }
@@ -335,6 +345,7 @@ class User extends CI_Controller
         // edit obat 
     public function edit_obat($id)
     {
+        
         $data['title'] = 'Ubah Data Obat';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['obat'] = $this->Data_apotek->getObat($id);
@@ -348,9 +359,10 @@ class User extends CI_Controller
         $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
         $this->form_validation->set_rules('nama_kat', 'Kategori', 'required');
         $this->form_validation->set_rules('kedaluwarsa', 'Kedaluwarsa', 'required');
-        $this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required|numeric');
-        $this->form_validation->set_rules('harga_beli', 'Harga Beli', 'required|numeric');
+        $this->form_validation->set_rules('h_jual', 'Harga Jual', 'required|numeric');
+        $this->form_validation->set_rules('h_beli', 'Harga Beli', 'required|numeric');
         $this->form_validation->set_rules('nama_pemasok', 'Nama Pemasok', 'required');
+ 
 
         if($this->form_validation->run() == FALSE)
         {
@@ -361,6 +373,7 @@ class User extends CI_Controller
             $this->load->view('templates/footer');
         }
         else {
+            // var_dump($this->input->post("h_jual"));die;
             $this->Data_apotek->edit_obatan();
             $this->session->set_flashdata('flash','diubah');
             redirect('user/lihat_obat');
@@ -447,6 +460,20 @@ class User extends CI_Controller
         $this->session->set_flashdata('flash', 'dihapus');
         redirect('user/lihat_pemasok');
     }
+
+    // TRANSAKSI
+    function getmedbysupplier(){
+        $nama_pemasok=$this->input->post('nama_pemasok');
+        $data=$this->data_apotek->getmedbysupplier($nama_pemasok);
+        echo json_encode($data);
+    }
+
+    function product()
+	{
+	    $nama_obat=$this->input->post('nama_obat');
+        $data=$this->Data_apotek->get_product($nama_obat);
+        echo json_encode($data);
+	}
 
     // export EXCEL
     public function excel(){
