@@ -17,11 +17,11 @@
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-1 m-1" style="font-size:20px;">
             <span class="count_top"><i class="fa fa-edit"></i> Total Penjualan</span>
-            <div class="count" style="text-align: ;"><?php echo ($sumJual/1000) ?>k</div>
+            <div class="count" style="text-align: ;"><?php echo number_format($sumJual) ?></div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-1 m-1" style="font-size:20px;">
             <span class="count_top"><i class="fa fa-edit"></i> Total Pembelian</span>
-            <div class="count" style="text-align: ;"><?php echo ($sumBeli/1000) ?>k</div>
+            <div class="count" style="text-align: ;"><?php echo number_format($sumBeli) ?></div>
         </div>
     </div>
     <!-- /Header Keterangan -->

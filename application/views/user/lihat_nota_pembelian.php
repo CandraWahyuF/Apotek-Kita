@@ -30,9 +30,9 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4">
-                    Pembeli
+                    Pemasok
                     <address>
-                        <strong><?php echo $i->nama_pembeli ?></strong>
+                        <strong><?php echo $i->nama_pemasok ?></strong>
 
                         <br>Bandar Lampung
 
