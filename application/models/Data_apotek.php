@@ -415,4 +415,17 @@ class Data_apotek extends CI_Model
             return $run_q;
     }
 
+    function invoice()
+    {
+        $this->db->select('*');
+            
+            $this->db->select_sum('tb_penjualan.banyak');
+        
+            $this->db->group_by('ref');
+            $this->db->order_by ('tgl_beli', 'DESC');
+
+            $run_q = $this->db->get('tb_penjualan');
+            return $run_q;
+    }
+
 }

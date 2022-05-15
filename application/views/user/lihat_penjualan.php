@@ -24,32 +24,32 @@
                     <thead>
                         <tr>
                             <th>Kode Referensi</th>
+                            <th>Nama Pembeli</th>
+                            <th>Tanggal Beli</th>
                             <th>Nama Obat</th>
                             <th>Harga Jual</th>
                             <th>Banyak</th>
-                            <th>Nama Pembeli</th>
-                            <th>Tanggal Beli</th>
                             <th>Total</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($penjualan as $data) : 
+                        foreach ($table_invoice as $data) : 
                     ?>
                         <tr>
                             <td><?= $data->ref; ?></td>
+                            <td><?= $data->nama_pembeli; ?></td>
+                            <td><?= date('j F Y',strtotime($data->tgl_beli)); ?></td>
                             <td><?= $data->nama_obat; ?></td>
                             <td><?= $data->h_beli; ?></td>
                             <td><?= $data->banyak; ?></td>
-                            <td><?= $data->nama_pembeli; ?></td>
-                            <td><?= date('j F Y',strtotime($data->tgl_beli)); ?></td>
                             <td>Rp <?php echo number_format($data->grandtotal) ?></td>
                             <td style=" text-align: center;">
                                 <a href="<?= base_url('user/lihat_nota/'). $data->ref?>"><button type="button"
                                         class="sbtn btn-success"><i class="fas fa-address-book"></i></button></a>
-                                <a href="<?= base_url('user/edit_penjualan/'). $data->id_jual?>"><button type="edit"
-                                        class="sbtn btn-success"><i class="fas fa-edit"></i></button></a>
+                                <!-- <a href="<?= base_url('user/edit_penjualan/'). $data->id_jual?>"><button type="edit"
+                                        class="sbtn btn-success"><i class="fas fa-edit"></i></button></a> -->
 
                                 <!-- <a href="<?= base_url('user/hapus_penjualan/'). $data->id_jual?>"><button type="delete"
                                         class="sbtn btn-danger"><i class="fas fa-trash"></i></button></a> -->

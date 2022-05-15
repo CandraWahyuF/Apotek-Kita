@@ -30,7 +30,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4">
-                    Ke
+                    Pembeli
                     <address>
                         <strong><?php echo $i->nama_pembeli ?></strong>
 
@@ -40,11 +40,11 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4">
-                    <b>No Referensi: #<?php echo $i->ref ?></b>
+                    <b>No Referensi : #<?php echo $i->ref ?></b>
                     <br>
-                    <b>Total Pembelian: <?php echo $i->banyak ?></b>
+                    <b>Total Pembelian : <?php echo $i->banyak ?></b>
                     <br>
-                    <b>Tanggal: <?php echo date('j F Y',strtotime($i->tgl_beli)) ?></b>
+                    <b>Tanggal : <?php echo date('j F Y',strtotime($i->tgl_beli)) ?></b>
                     <br>
 
                 </div>
@@ -72,7 +72,6 @@
                                 <td><?php echo $si->nama_obat ?></td>
                                 <td>Rp <?php echo number_format($si->h_beli) ?></td>
                                 <td><?php echo $si->banyak ?></td>
-
                                 <td>Rp <?php echo number_format($si->subtotal) ?></td>
                             </tr>
 
@@ -81,8 +80,9 @@
                         <tfoot>
                             <?php foreach($table_invoice as $i){ ?>
                             <tr>
-                                <td style="text-align:center; vertical-align: middle" colspan="3"><b>Grand
+                                <td style="text-align:center; vertical-align: middle" colspan="2"><b>Grand
                                         Total</b></td>
+                                <td><?php echo ($i->banyak) ?></td>
                                 <td>
                                     <b>Rp <?php echo number_format($i->grandtotal) ?></b>
                                 </td>

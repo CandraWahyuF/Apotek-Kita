@@ -169,6 +169,7 @@ class User extends CI_Controller
 
         // queri pemanggilan tabel di DB
         $data['penjualan'] = $this->Data_apotek->getDataApotek('tb_penjualan');
+        $data['table_invoice'] = $this->Data_apotek->invoice()->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
