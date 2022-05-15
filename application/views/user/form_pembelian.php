@@ -149,6 +149,7 @@ addpembelian.onclick = function(event) {
         '" name="subtotal[]" class="form-control subtotal" readonly>',
         '<button id="removeproduk" class="btn btn-danger btn-sm" type="button"><span class="fa fa-trash"></span> Hapus</button>',
     ]).draw(false);
+
     var myOpt = [];
     $("select").each(function() {
         myOpt.push($(this).val());
@@ -169,7 +170,7 @@ addpembelian.onclick = function(event) {
 $('#pembelian').on("click", "#removeproduk", function() {
     console.log($(this).parent());
     pembelian.row($(this).parents('tr')).remove().draw(false);
-    updatepembelian();
+    updateTotal();
 });
 
 
@@ -186,10 +187,10 @@ $('#pembelian').on('change', '.nama_obat', function() {
         },
         cache: false,
         success: function(data) {
-            $.each(data, function(nama_obat, stok, unit, harga_beli) {
+            $.each(data, function(nama_obat, stok, nama_kat, h_beli) {
                 $($select.data('stok')).val(data.stok);
-                $($select.data('unit')).val(data.unit);
-                $($select.data('harga_beli')).val(data.harga_beli);
+                $($select.data('nama_kat')).val(data.nama_kat);
+                $($select.data('h_beli')).val(data.h_beli);
             });
         }
     });
@@ -207,14 +208,12 @@ function updateSubtotalp() {
         var unitStock = parseInt($row.find('.stok').val());
         var unitCount = parseInt($row.find('.banyak').val());
 
-
         if (unitCount < 0) {
             $row.find('.banyak').val(0);
-            updateSubtotal();
+            updateSubtotalp();
 
         } else {
-
-            var Sub = parseInt(($row.find('.harga_beli').val()) * unitCount);
+            var Sub = parseInt(($row.find('.h_beli').val()) * unitCount);
             $row.find('.subtotal').val(Sub);
             updateTotal();
 
@@ -223,7 +222,7 @@ function updateSubtotalp() {
     });
 }
 
-function updatepembelian() {
+function updateTotal() {
     var grandtotal = 0;
     $('.subtotal').each(function() {
         grandtotal += parseInt($(this).val());

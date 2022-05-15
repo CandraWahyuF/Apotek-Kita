@@ -8,8 +8,8 @@
         <div class="card-body">
             <a href="<?php echo base_url('user/form_pembelian'); ?>"><button class="btn btn-success mb-3">
                     <i class="fas fa-plus"> Tambah Pembelian</i></button></a>
-            
-        <div class="dropdown d-inline">
+
+            <div class="dropdown d-inline">
                 <button class="btn btn-warning dropdown-toggle mb-3" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-expanded="false">
                     Export File
@@ -26,29 +26,29 @@
                         <tr>
                             <th>Kode Referensi</th>
                             <th>Nama Obat</th>
-                            <th>Harga Beli</th>
-                            <th>Banyak</th>
                             <th>Nama Pemasok</th>
                             <th>Tanggal Beli</th>
+                            <th>Harga Beli</th>
+                            <th>Banyak</th>
                             <th>Total</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($pembelian as $data) : 
+                        foreach ($tb_beli as $data) : 
                     ?>
                         <tr>
-                            <td><?= $data->koderef; ?></td>
+                            <td><?= $data->ref; ?></td>
                             <td><?= $data->nama_obat; ?></td>
+                            <td><?= $data->nama_pemasok; ?></td>
+                            <td><?= date('j F Y',strtotime($data->tgl_beli)); ?></td>
                             <td><?= $data->h_beli; ?></td>
                             <td><?= $data->banyak; ?></td>
-                            <td><?= $data->nama_pemasok; ?></td>
-                            <td><?= $data->tgl_beli; ?></td>
-                            <td><?= $data->total; ?></td>
+                            <td>Rp <?php echo number_format($data->grandtotal) ?></td>
                             <td>
-                                <a href="<?= base_url('user/edit_obat/'). $data->id_beli?>"><button type="edit"
-                                        class="sbtn btn-success"><i class="fas fa-edit"></i></button></a>
+                                <a href="<?= base_url('user/lihat_nota_pembelian/'). $data->ref?>"><button type="button"
+                                        class="sbtn btn-success"><i class="fas fa-address-book"></i></button></a>
 
                                 <!-- <a href="<?= base_url('user/hapus_pembelian/'). $data->id_beli?>"><button type="delete"
                                         class="sbtn btn-danger"><i class="fas fa-trash"></i></button></a> -->

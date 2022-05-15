@@ -300,7 +300,8 @@ class Data_apotek extends CI_Model
 
     
     function get_product($nama_obat)
-    {   $hasil = array();
+    {  
+        $hasil = array();
         $hsl=$this->db->query("SELECT * FROM tb_obat WHERE nama_obat='$nama_obat'");
         if($hsl->num_rows()>0){
             foreach ($hsl->result() as $data) {
@@ -368,6 +369,40 @@ class Data_apotek extends CI_Model
 		$this->db->insert_batch('tb_penjualan', $data);
 	}
 
+    function tambah_pembelian(){
+		 
+			$nama_pemasok = $this->input->post('nama_pemasok');
+			$tgl_beli = date("Y-m-d",strtotime($this->input->post('tgl_beli')));
+			$grandtotal = $this->input->post('grandtotal');
+			$ref = generateRandomString();
+			$nama_obat = $this->input->post('nama_obat');
+			$h_beli = $this->input->post('h_beli');
+			$banyak = $this->input->post('banyak');
+			$subtotal = $this->input->post('subtotal');
+
+		foreach($nama_obat as $key=>$val){
+		   
+		$data[] = array(
+				'nama_pemasok' => $nama_pemasok,
+				'tgl_beli' => $tgl_beli,
+				'grandtotal' => $grandtotal,
+				'ref' => $ref,
+				'nama_obat' => $val,
+				'h_beli' => $h_beli[$key],
+				'banyak' => $banyak[$key],
+				'subtotal' => $subtotal[$key],
+				 
+				);
+
+		$this->db->set('stok', 'stok+'.$banyak[$key], FALSE);
+	    $this->db->where('nama_obat', $val);
+	    $updated = $this->db->update('tb_obat');
+		
+		}
+		
+		$this->db->insert_batch('tb_pembelian', $data);	
+	}
+
     // LAPORAN
     function get_gabung($tahun_beli){
         
@@ -415,7 +450,9 @@ class Data_apotek extends CI_Model
             return $run_q;
     }
 
-    function invoice()
+    // FITUR PENGELOMPOKAN TRANSAKSI
+
+    function penjualan()
     {
         $this->db->select('*');
             
@@ -425,6 +462,19 @@ class Data_apotek extends CI_Model
             $this->db->order_by ('tgl_beli', 'DESC');
 
             $run_q = $this->db->get('tb_penjualan');
+            return $run_q;
+    }
+
+    function pembelian()
+    {
+        $this->db->select('*');
+            
+            $this->db->select_sum('tb_pembelian.banyak');
+        
+            $this->db->group_by('ref');
+            $this->db->order_by ('tgl_beli', 'DESC');
+
+            $run_q = $this->db->get('tb_pembelian');
             return $run_q;
     }
 

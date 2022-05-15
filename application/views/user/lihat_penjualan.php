@@ -25,7 +25,7 @@
                         <tr>
                             <th>Kode Referensi</th>
                             <th>Nama Pembeli</th>
-                            <th>Tanggal Beli</th>
+                            <th>Tanggal Jual</th>
                             <th>Nama Obat</th>
                             <th>Harga Jual</th>
                             <th>Banyak</th>
@@ -35,7 +35,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($table_invoice as $data) : 
+                        foreach ($tb_jual as $data) : 
                     ?>
                         <tr>
                             <td><?= $data->ref; ?></td>
@@ -46,7 +46,7 @@
                             <td><?= $data->banyak; ?></td>
                             <td>Rp <?php echo number_format($data->grandtotal) ?></td>
                             <td style=" text-align: center;">
-                                <a href="<?= base_url('user/lihat_nota/'). $data->ref?>"><button type="button"
+                                <a href="<?= base_url('user/lihat_nota_penjualan/'). $data->ref?>"><button type="button"
                                         class="sbtn btn-success"><i class="fas fa-address-book"></i></button></a>
                                 <!-- <a href="<?= base_url('user/edit_penjualan/'). $data->id_jual?>"><button type="edit"
                                         class="sbtn btn-success"><i class="fas fa-edit"></i></button></a> -->

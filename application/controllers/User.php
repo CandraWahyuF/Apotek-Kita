@@ -169,7 +169,7 @@ class User extends CI_Controller
 
         // queri pemanggilan tabel di DB
         $data['penjualan'] = $this->Data_apotek->getDataApotek('tb_penjualan');
-        $data['table_invoice'] = $this->Data_apotek->invoice()->result();
+        $data['tb_jual'] = $this->Data_apotek->penjualan()->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -187,6 +187,7 @@ class User extends CI_Controller
 
         // queri pemanggilan tabel di DB
         $data['pembelian'] = $this->Data_apotek->getDataApotek('tb_pembelian');
+        $data['tb_beli'] = $this->Data_apotek->pembelian()->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -291,8 +292,7 @@ class User extends CI_Controller
         $data['get_med'] = $this->Data_apotek->get_medicine();
 
         $this->form_validation->set_rules('nama_pemasok', 'Nama Pemasok', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('telepon', 'Telepon', 'required|numeric');
+        $this->form_validation->set_rules('tgl_beli', 'Tanggal Beli', 'required');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -470,7 +470,7 @@ class User extends CI_Controller
     // TRANSAKSI
     function getmedbysupplier(){
         $nama_pemasok=$this->input->post('nama_pemasok');
-        $data=$this->data_apotek->getmedbysupplier($nama_pemasok);
+        $data=$this->Data_apotek->getmedbysupplier($nama_pemasok);
         echo json_encode($data);
     }
 
@@ -482,7 +482,7 @@ class User extends CI_Controller
 	}
 
     // NOTA INI
-    public function lihat_nota($ref)
+    public function lihat_nota_penjualan($ref)
     {
         $data['title'] = 'Tanda Bukti';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -497,7 +497,26 @@ class User extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('user/lihat_nota', $data);
+        $this->load->view('user/lihat_nota_penjualan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function lihat_nota_pembelian($ref)
+    {
+        $data['title'] = 'Tanda Bukti';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $where = array('ref' => $ref);
+        $data['table_invoice'] = $this->Data_apotek->show_data($where, 'tb_pembelian')->result();
+		$data['show_invoice'] = $this->Data_apotek->show_invoice($where, 'tb_pembelian')->result();
+
+        // queri pemanggilan tabel di DB
+        $data['penjualan'] = $this->Data_apotek->getDataApotek('tb_penjualan');
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/lihat_nota_pembelian', $data);
         $this->load->view('templates/footer');
     }
 

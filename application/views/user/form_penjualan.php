@@ -103,7 +103,7 @@ var counter = 1;
 
 addpenjualan.onclick = function(event) {
     penjualan.row.add([
-        '<select required="required" style="width:100%;" class="form-control nama_obat" id="nama_obat' +
+        '<select required="required" style="width:100%" class="form-control nama_obat" id="nama_obat' +
         counter + '" name="nama_obat[]" data-stok="#stok' + counter + '" data-nama_kat="#nama_kat' +
         counter + '" data-h_beli="#h_beli' + counter +
         '"><option selected="true" value="" disabled ></option><?php foreach ($get_med as $gm) { ?><option value="<?php echo $gm; ?>"><?php echo $gm; ?></option><?php  } ?></select>',
@@ -180,7 +180,6 @@ function updateSubtotalp() {
         if (unitCount > unitStock) {
             $row.find('.banyak').val(unitStock);
             updateSubtotalp();
-
         } else if (unitCount < 0) {
             $row.find('.banyak').val(0);
             updateSubtotalp();
@@ -188,8 +187,6 @@ function updateSubtotalp() {
             var Sub = parseInt(($row.find('.h_beli').val()) * unitCount);
             $row.find('.subtotal').val(Sub);
             updateTotal();
-
-
         }
     });
 }
