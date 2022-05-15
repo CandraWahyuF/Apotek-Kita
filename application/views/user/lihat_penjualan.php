@@ -47,7 +47,7 @@
                             <td>Rp <?php echo number_format($data->grandtotal) ?></td>
                             <td style=" text-align: center;">
                                 <a href="<?= base_url('user/lihat_nota_penjualan/'). $data->ref?>"><button type="button"
-                                        class="sbtn btn-success"><i class="fas fa-address-book"></i></button></a>
+                                        class="sbtn btn-success"><i class="fas fa-file-invoice"></i></button></a>
                                 <!-- <a href="<?= base_url('user/edit_penjualan/'). $data->id_jual?>"><button type="edit"
                                         class="sbtn btn-success"><i class="fas fa-edit"></i></button></a> -->
 
