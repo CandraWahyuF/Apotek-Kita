@@ -320,8 +320,6 @@ class User extends CI_Controller
 
         $this->form_validation->set_rules('nama_pembeli', 'Nama Pembeli', 'required');
         $this->form_validation->set_rules('tgl_beli', 'Tanggal Beli', 'required');
-        $this->form_validation->set_rules('nama_obat', 'Nama Obat', 'required');
-        $this->form_validation->set_rules('banyak', 'banyak', 'required');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -332,7 +330,6 @@ class User extends CI_Controller
             $this->load->view('templates/footer');
         }
         else {
-            var_dump("tes");die;
             $this->Data_apotek->tambah_penjualan();
             $this->session->set_flashdata('flash','ditambahkan');
             redirect('user/lihat_penjualan');
@@ -432,6 +429,14 @@ class User extends CI_Controller
             redirect('user/lihat_pemasok');
         }
     }
+
+    // LAPORAN
+    function gabung()
+	{
+       $tahun_beli=$this->input->post('tahun_beli');
+       	$data = $this->apotek_data->get_gabung($tahun_beli);
+		echo json_encode($data);
+	}
 
     
 

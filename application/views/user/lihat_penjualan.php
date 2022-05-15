@@ -38,13 +38,13 @@
                         foreach ($penjualan as $data) : 
                     ?>
                         <tr>
-                            <td><?= $data->koderef; ?></td>
+                            <td><?= $data->ref; ?></td>
                             <td><?= $data->nama_obat; ?></td>
                             <td><?= $data->h_beli; ?></td>
                             <td><?= $data->banyak; ?></td>
                             <td><?= $data->nama_pembeli; ?></td>
-                            <td><?= $data->tgl_beli; ?></td>
-                            <td><?= $data->total; ?></td>
+                            <td><?= date('j F Y',strtotime($data->tgl_beli)); ?></td>
+                            <td>Rp <?php echo number_format($data->grandtotal) ?></td>
                             <td>
                                 <a href="<?= base_url('user/edit_penjualan/'). $data->id_jual?>"><button type="edit"
                                         class="sbtn btn-success"><i class="fas fa-edit"></i></button></a>

@@ -41,7 +41,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="<?= base_url('user/form_obat')?>">Tambah Obat</a>
                 <a class="collapse-item" href="<?= base_url('user/lihat_obat')?>">Lihat Obat</a>
-                <a class="collapse-item" href="<?= base_url('user/tabel_kedaluwarsa')?>">Obat Kadaluarsa</a>
+                <a class="collapse-item" href="<?= base_url('user/tabel_kedaluwarsa')?>">Obat Kedaluwarsa</a>
                 <a class="collapse-item" href="<?= base_url('user/tabel_stok')?>">Obat Akan Habis</a>
             </div>
         </div>

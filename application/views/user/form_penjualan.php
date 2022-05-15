@@ -23,7 +23,7 @@
 
                         <div class="row justify-content-center pt-2 mb-4">
                             <div class="col-2">
-                                <label for="tgl_beli" class="col-form-label">Tanggal Pembelian</label>
+                                <label for="tgl_beli" class="col-form-label">Tanggal Penjualan</label>
                             </div>
                             <div class="col-3">
                                 <input type="date" id="tgl_beli" name="tgl_beli" class="form-control">

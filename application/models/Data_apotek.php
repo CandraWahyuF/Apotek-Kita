@@ -349,7 +349,6 @@ class Data_apotek extends CI_Model
 		foreach($nama_obat as $key=>$val){
 		   
 		$data[] = array(
-            
 				'nama_pembeli' => $nama_pembeli,
 				'tgl_beli' => $tgl_beli,
 				'grandtotal' => $grandtotal,
@@ -358,7 +357,6 @@ class Data_apotek extends CI_Model
 				'h_beli' => $h_beli[$key],
 				'banyak' => $banyak[$key],
 				'subtotal' => $subtotal[$key],
-				
 				);
 
 		$this->db->set('stok', 'stok-'.$banyak[$key], FALSE);
@@ -369,5 +367,39 @@ class Data_apotek extends CI_Model
 		
 		$this->db->insert_batch('tb_penjualan', $data);
 	}
+
+    // LAPORAN
+    function get_gabung($tahun_beli){
+        
+       $query = $this->db->query("SELECT m.month_name as month, 
+                   i.total_inv, 
+                   p.total_pur
+                FROM month m
+                LEFT JOIN (SELECT MONTH(tgl_beli) as month, 
+                            SUM(subtotal) as total_inv  
+                            FROM table_invoice
+                            WHERE YEAR(tgl_beli)= '$tahun_beli'
+                            GROUP BY month) i  ON (m.month_num = i.month)    
+                LEFT JOIN (SELECT MONTH(tgl_beli) as month, 
+                            SUM(subtotal) as total_pur
+                            FROM  table_purchase 
+                            WHERE YEAR(tgl_beli)= '$tahun_beli'
+                            GROUP BY month) p ON (m.month_num = p.month )
+                ORDER BY m.month_num");
+        
+        $hasil = array();
+        
+            foreach($query->result_array() as $data){
+                $hasil[] = array(
+                    "month" => $data['month'],
+                    "total_inv" => $data['total_inv'],
+                    "total_pur" => $data['total_pur'],
+                    
+                    
+                );
+            }
+            return $hasil;
+
+    }
 
 }
