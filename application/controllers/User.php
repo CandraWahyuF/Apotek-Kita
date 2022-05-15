@@ -480,6 +480,26 @@ class User extends CI_Controller
         echo json_encode($data);
 	}
 
+    // NOTA INI
+    public function lihat_nota($ref)
+    {
+        $data['title'] = 'Tanda Bukti';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $where = array('ref' => $ref);
+        $data['table_invoice'] = $this->Data_apotek->show_data($where, 'tb_penjualan')->result();
+		$data['show_invoice'] = $this->Data_apotek->show_invoice($where, 'tb_penjualan')->result();
+
+        // queri pemanggilan tabel di DB
+        $data['penjualan'] = $this->Data_apotek->getDataApotek('tb_penjualan');
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/lihat_nota', $data);
+        $this->load->view('templates/footer');
+    }
+
     // export EXCEL
     public function excel(){
 

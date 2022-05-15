@@ -45,7 +45,9 @@
                             <td><?= $data->nama_pembeli; ?></td>
                             <td><?= date('j F Y',strtotime($data->tgl_beli)); ?></td>
                             <td>Rp <?php echo number_format($data->grandtotal) ?></td>
-                            <td>
+                            <td style=" text-align: center;">
+                                <a href="<?= base_url('user/lihat_nota/'). $data->ref?>"><button type="button"
+                                        class="sbtn btn-success"><i class="fas fa-address-book"></i></button></a>
                                 <a href="<?= base_url('user/edit_penjualan/'). $data->id_jual?>"><button type="edit"
                                         class="sbtn btn-success"><i class="fas fa-edit"></i></button></a>
 

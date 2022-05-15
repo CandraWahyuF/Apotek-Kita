@@ -399,7 +399,20 @@ class Data_apotek extends CI_Model
                 );
             }
             return $hasil;
+    }
 
+    // NOTA
+    function show_data($where, $table){      
+        $this->db->select('*');
+            $this->db->select_sum('banyak');
+            $run_q = $this->db->get_where($table,$where);
+            return $run_q;
+    }
+
+    function show_invoice($where, $table){      
+        $this->db->select('*');
+            $run_q = $this->db->get_where($table,$where);
+            return $run_q;
     }
 
 }
