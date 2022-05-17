@@ -57,7 +57,7 @@
                             <td><?= $data->stok; ?></td>
                             <td><?= $data->nama_pemasok; ?></td>
                             <td><?= date('j F Y',strtotime($data->kedaluwarsa)); ?></td>
-                            <td><?= $data->h_jual; ?></td>
+                            <td>Rp<?= number_format($data->h_jual); ?></td>
                             <td>
                                 <a href="<?= base_url('user/edit_obat/'). $data->id?>"><button type="edit"
                                         class="sbtn btn-success"><i class="fas fa-edit"></i></button></a>

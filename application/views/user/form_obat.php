@@ -89,9 +89,9 @@
                     <div class="col-2">
                         <label for="harga_jual" class="col-form-label">Harga Jual (Rp)</label>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" class="hasil">
                         <input type="text" id="harga_jual" name="harga_jual" class="form-control"
-                            value="<?= set_value('harga_jual')?>" data-validate-minmax="10,1000000">
+                            value="<?= set_value('harga_jual')?>" data-validate-minmax="10,1000000" readonly>
                         <?= form_error('harga_jual', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -101,7 +101,6 @@
                         <label for="nama_pemasok" class="col-form-label">Nama Pemasok</label>
                     </div>
                     <div class="col-3">
-                        value="<?= set_value('nama_pemasok')?>">-->
                         <select name="nama_pemasok" id="nama_pemasok" class="select2_single form-control" tabindex="-1"
                             required="required">
                             <option selected="true" value="" disabled></option>
@@ -126,3 +125,18 @@
         </div>
     </div>
 </div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#harga_beli').keyup(function() {
+        var beli = parseInt($('#harga_beli').val());
+
+        var a = beli + (beli * 0.11);
+        var b = a * 0.2;
+        var h_jual = a + b;
+        $('#harga_jual').val(h_jual);
+    });
+});
+</script>

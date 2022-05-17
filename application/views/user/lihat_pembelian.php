@@ -43,7 +43,7 @@
                             <td><?= $data->nama_obat; ?></td>
                             <td><?= $data->nama_pemasok; ?></td>
                             <td><?= date('j F Y',strtotime($data->tgl_beli)); ?></td>
-                            <td><?= $data->h_beli; ?></td>
+                            <td>Rp <?= number_format($data->h_beli); ?></td>
                             <td><?= $data->banyak; ?></td>
                             <td>Rp <?php echo number_format($data->grandtotal) ?></td>
                             <td>

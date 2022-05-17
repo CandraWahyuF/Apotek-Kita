@@ -35,7 +35,7 @@
                             <td><?= $data->stok; ?></td>
                             <td><?= $data->nama_pemasok; ?></td>
                             <td><?= date('j F Y',strtotime($data->kedaluwarsa)); ?></td>
-                            <td><?= $data->h_jual; ?></td>
+                            <td>Rp<?= number_format($data->h_jual); ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -79,7 +79,7 @@
                             <td><?= $data->stok; ?></td>
                             <td><?= $data->nama_pemasok; ?></td>
                             <td><?= date('j F Y',strtotime($data->kedaluwarsa)); ?></td>
-                            <td><?= $data->h_jual; ?></td>
+                            <td>Rp<?= number_format($data->h_jual); ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -85,7 +85,7 @@
                     </div>
                     <div class="col-3">
                         <input type="text" id="h_jual" name="h_jual" class="form-control"
-                            value="<?= $obat['h_jual']; ?>">
+                            value="<?= $obat['h_jual']; ?>" readonly>
                         <?= form_error('h_jual', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
                 </div>
@@ -122,3 +122,17 @@
         </div>
     </div>
 </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#h_beli').keyup(function() {
+        var beli = parseInt($('#h_beli').val());
+
+        var a = beli + (beli * 0.11);
+        var b = a * 0.2;
+        var h_jual = a + b;
+        $('#h_jual').val(h_jual);
+    });
+});
+</script>
