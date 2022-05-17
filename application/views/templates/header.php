@@ -22,6 +22,8 @@
 
     <!-- Data Tables -->
     <link href="<?= base_url('assets/');?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
 
     <!-- Data time picker -->
     <link href="<?= base_url('assets/');?>vendor/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css"
