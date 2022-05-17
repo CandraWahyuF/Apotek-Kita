@@ -4,6 +4,15 @@
             <h6 class="m-0 font-weight-bold text-dark"><?= $title; ?></h6>
         </div>
         <div class="card-body">
+            <div class="col-md-3 mb-4">
+                <div class="input-group date" id="gabung">
+                    <input type="text" name="tahun_beli" id="tahun_beli" class="form-control tahun_beli"
+                        required="required" placeholder="Pilih tahun">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -23,6 +32,15 @@
     </div>
 </div>
 
+
+<script src="<?= base_url('assets/');?>vendor/moment/min/moment.min.js">
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
+<script src="<?= base_url('assets/');?>vendor/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js">
+</script>
+
 <script>
 $('#gabung').datetimepicker({
 
@@ -38,77 +56,8 @@ function gabungChart() {
 
     var tahun_beli = $('#gabung').data('date');
 
-
     $.ajax({
-        type: "POST",
-        url: "<?php echo base_url('example/gabung') ?>",
-        dataType: "JSON",
-
-        data: {
-            "tahun_beli": tahun_beli
-        },
-        success: function(data) {
-
-            console.log(data);
-
-            var total_inv = [];
-            var total_pur = [];
-            var month = [];
-
-            for (var i in data) {
-                total_inv.push(data[i].total_inv);
-                total_pur.push(data[i].total_pur);
-                month.push(data[i].month);
-            }
-
-            var chartdata = {
-                labels: month,
-                datasets: [{
-                        label: 'Total Pembelian',
-                        backgroundColor: 'rgba(57, 80, 103, 0.4)',
-                        borderColor: 'rgba(57, 80, 103, 0.7)',
-                        hoverBackgroundColor: 'rgba(57, 80, 103, 0.6)',
-                        hoverBorderColor: 'rgba(57, 80, 103, 1)',
-
-                        data: total_pur
-                    },
-                    {
-                        label: 'Total Penjualan',
-                        backgroundColor: 'rgba(26, 187, 156, 0.3)',
-                        borderColor: 'rgba(26, 187, 156, 0.7)',
-                        hoverBackgroundColor: 'rgba(26, 187, 156, 0.6)',
-                        hoverBorderColor: 'rgba(26, 187, 156, 1)',
-                        data: total_inv
-
-
-                    }
-                ]
-
-            };
-
-            var ctx = $("#report");
-
-            var barGraph = new Chart(ctx, {
-                type: 'line',
-                data: chartdata,
-                options: {
-                    responsive: true,
-                    legend: {
-
-
-                    },
-
-                }
-            });
-
-
-        }
-    });
-
-
-
-    $.ajax({
-        url: "<?php echo base_url('example/gabung') ?>",
+        url: "<?php echo base_url('user/gabung') ?>",
         async: false,
         type: "POST",
         data: {
@@ -148,54 +97,6 @@ function gabungChart() {
             }
             $("#labatotal").html(mytotal); //pass the data to your tbody
         }
-
-
     })
-
-
-
 }
-</script>
-
-<script>
-$.ajax({
-
-    url: "<?php echo base_url('example/chart_unit') ?>",
-    method: "GET",
-
-    success: function(data) {
-        var data = JSON.parse(data);
-        console.log(data);
-
-
-        var stok = [];
-        var unit = [];
-
-        for (var i in data) {
-            stok.push(data[i].stok);
-            unit.push(data[i].unit);
-        }
-
-        var chartdata = {
-            labels: unit,
-            datasets: [{
-                label: 'Stok obat',
-                backgroundColor: 'rgba(26, 187, 156, 0.7)',
-                borderColor: 'rgba(26, 187, 156, 0.7)',
-                hoverBackgroundColor: 'rgba(26, 187, 156, 1)',
-                hoverBorderColor: 'rgba(26, 187, 156, 1)',
-                data: stok
-            }]
-        };
-
-        var ctx = $("#unit_chart");
-
-        var barGraph = new Chart(ctx, {
-            type: 'bar',
-            data: chartdata
-        });
-
-
-    }
-});
 </script>

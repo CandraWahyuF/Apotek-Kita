@@ -49,19 +49,13 @@
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets/');?>js/sb-admin-2.min.js"></script>
 
+<!-- Date time picker -->
+<script src="<?= base_url('assets/');?>vendor/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js">
+</script>
 
-<!-- Download File -->
-<!-- <script>
-$(document).ready(function() {
-    $('dataTable').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    });
-});
-</script> -->
-<!-- End Download File -->
+<!-- Moment -->
+<script src="<?= base_url('assets/');?>vendor/moment/min/moment.min.js">
+</script>
 
 <!-- Data Tables -->
 <script src="<?= base_url('assets/');?>vendor/datatables/jquery.dataTables.min.js"></script>

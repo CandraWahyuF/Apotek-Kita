@@ -96,12 +96,13 @@ class User extends CI_Controller
             // Tabel kedaluwarsa
     public function tabel_laporan()
     {
-        $data['title'] = 'Tabel Laporan Bulanan';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Rekapitulasi Bulanan';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         // queri pemanggilan tabel di DB
-        // $data['obat'] = $this->Data_apotek->getDataApotek('tb_obat');
+        $data['totpur'] = $this->Data_apotek->count_totalbeli();
+		$data['totinv'] = $this->Data_apotek->count_totaljual();
+		$data['report'] = $this->Data_apotek->get_laporan();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -435,7 +436,7 @@ class User extends CI_Controller
     function gabung()
 	{
        $tahun_beli=$this->input->post('tahun_beli');
-       	$data = $this->apotek_data->get_gabung($tahun_beli);
+       	$data = $this->Data_apotek->get_gabung($tahun_beli);
 		echo json_encode($data);
 	}
 
@@ -479,6 +480,14 @@ class User extends CI_Controller
 	    $nama_obat=$this->input->post('nama_obat');
         $data=$this->Data_apotek->get_product($nama_obat);
         echo json_encode($data);
+	}
+
+    // LAPORAN
+    function totale()
+	{
+		$tahun_beli=$this->input->post('tahun_beli');
+       	$data = $this->Data_apotek->get_total($tahun_beli);
+		echo json_encode($data);
 	}
 
     // NOTA INI

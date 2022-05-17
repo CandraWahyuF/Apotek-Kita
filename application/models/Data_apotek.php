@@ -404,6 +404,59 @@ class Data_apotek extends CI_Model
 	}
 
     // LAPORAN
+    public function get_laporan(){
+        $q = "SELECT month.month_name as month, 
+            SUM(tb_pembelian.subtotal) AS total1,
+            SUM(tb_penjualan.subtotal) AS total2  
+            FROM month 
+            LEFT JOIN tb_pembelian ON month.month_num = MONTH(tb_pembelian.tgl_beli)
+            AND YEAR(tb_pembelian.tgl_beli)= '2018'  
+            LEFT JOIN tb_penjualan ON month.month_num = MONTH(tb_penjualan.tgl_beli)
+            AND YEAR(tb_penjualan.tgl_beli)= '2018' 
+            GROUP BY month.month_name ORDER BY month.month_num";
+       
+        $run_q = $this->db->query($q);
+
+        if($run_q->num_rows() > 0){
+            return $run_q->result();
+        }
+
+        else{
+            return FALSE;
+        }
+    }
+
+
+    function count_totalbeli(){       
+       $q = "SELECT *, SUM(tb_pembelian.subtotal) as 'totalTrans' FROM tb_pembelian ";
+
+        $run_q = $this->db->query($q);
+
+        if ($run_q->num_rows() > 0) {
+            foreach ($run_q->result() as $get) {
+                return $get->totalTrans;
+            }
+        }
+        else {
+            return FALSE;
+        }  
+    }
+
+    function count_totaljual(){       
+       $q = "SELECT *, SUM(tb_penjualan.subtotal) as 'totalTrans' FROM tb_penjualan";
+
+        $run_q = $this->db->query($q);
+
+        if ($run_q->num_rows() > 0) {
+            foreach ($run_q->result() as $get) {
+                return $get->totalTrans;
+            }
+        }
+        else {
+            return FALSE;
+        }  
+    }
+
     function get_gabung($tahun_beli){
         
        $query = $this->db->query("SELECT m.month_name as month, 
@@ -412,15 +465,43 @@ class Data_apotek extends CI_Model
                 FROM month m
                 LEFT JOIN (SELECT MONTH(tgl_beli) as month, 
                             SUM(subtotal) as total_inv  
-                            FROM table_invoice
+                            FROM tb_penjualan
                             WHERE YEAR(tgl_beli)= '$tahun_beli'
                             GROUP BY month) i  ON (m.month_num = i.month)    
                 LEFT JOIN (SELECT MONTH(tgl_beli) as month, 
                             SUM(subtotal) as total_pur
-                            FROM  table_purchase 
+                            FROM  tb_pembelian 
                             WHERE YEAR(tgl_beli)= '$tahun_beli'
                             GROUP BY month) p ON (m.month_num = p.month )
                 ORDER BY m.month_num");
+        
+        $hasil = array();
+        
+            foreach($query->result_array() as $data){
+                $hasil[] = array(
+                    "month" => $data['month'],
+                    "total_inv" => $data['total_inv'],
+                    "total_pur" => $data['total_pur'],
+                    
+                    
+                );
+            }
+            return $hasil;
+    }
+
+    // LAPORAN
+    function get_total($tahun_beli){       
+         $query = $this->db->query("SELECT *, (SELECT *, 
+                            SUM(subtotal) as total_inv  
+                            FROM table_invoice
+                            WHERE YEAR(tgl_beli)= '2018'
+                            )  
+                LEFT JOIN (SELECT *, 
+                            SUM(subtotal) as total_pur
+                            FROM  table_purchase 
+                            WHERE YEAR(tgl_beli)= '2018'
+                            )  
+                ");
         
         $hasil = array();
         
