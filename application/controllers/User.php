@@ -100,8 +100,8 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         // queri pemanggilan tabel di DB
-        $data['totpur'] = $this->Data_apotek->count_totalbeli();
-		$data['totinv'] = $this->Data_apotek->count_totaljual();
+        $data['sumJual'] = $this->Data_apotek->total_jual();
+        $data['sumBeli'] = $this->Data_apotek->total_beli();
 		$data['report'] = $this->Data_apotek->get_laporan();
 
         $this->load->view('templates/header', $data);
