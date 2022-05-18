@@ -48,7 +48,7 @@
                             <thead>
                                 <tr>
                                     <th style="text-align: center">Obat yang dibeli</th>
-                                    <th style="text-align: center">Stok</th>
+                                    <th style="text-align: center">Sisa Stok</th>
                                     <th style="text-align: center">Kategori</th>
                                     <th style="text-align: center">Harga</th>
                                     <th style="text-align: center">Banyak</th>

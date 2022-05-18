@@ -410,9 +410,9 @@ class Data_apotek extends CI_Model
             SUM(tb_penjualan.subtotal) AS total2  
             FROM month 
             LEFT JOIN tb_pembelian ON month.month_num = MONTH(tb_pembelian.tgl_beli)
-            AND YEAR(tb_pembelian.tgl_beli)= '2018'  
+            AND YEAR(tb_pembelian.tgl_beli)= '2021'  
             LEFT JOIN tb_penjualan ON month.month_num = MONTH(tb_penjualan.tgl_beli)
-            AND YEAR(tb_penjualan.tgl_beli)= '2018' 
+            AND YEAR(tb_penjualan.tgl_beli)= '2021' 
             GROUP BY month.month_name ORDER BY month.month_num";
        
         $run_q = $this->db->query($q);
@@ -494,12 +494,12 @@ class Data_apotek extends CI_Model
          $query = $this->db->query("SELECT *, (SELECT *, 
                             SUM(subtotal) as total_inv  
                             FROM table_invoice
-                            WHERE YEAR(tgl_beli)= '2018'
+                            WHERE YEAR(tgl_beli)= '2021'
                             )  
                 LEFT JOIN (SELECT *, 
                             SUM(subtotal) as total_pur
                             FROM  table_purchase 
-                            WHERE YEAR(tgl_beli)= '2018'
+                            WHERE YEAR(tgl_beli)= '2021'
                             )  
                 ");
         

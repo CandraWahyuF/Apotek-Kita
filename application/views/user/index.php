@@ -183,3 +183,6 @@
 
 </div>
 <!-- /.container-fluid -->
+
+<script src="<?= base_url('assets/');?>vendor/moment/min/moment.min.js">
+</script>
