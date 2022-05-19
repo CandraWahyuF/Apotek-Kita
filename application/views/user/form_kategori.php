@@ -1,19 +1,21 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
+            <h6 class="m-0 font-weight-bold text-dark"><?= $title; ?></h6>
         </div>
         <div class="x_content">
-            <form action="<?php echo base_url('user/tambah_kategori'); ?>" method="post"
-                class="form-horizontal form-label-left" novalidate>
+            <form action="" method="post" class="form-horizontal form-label-left" novalidate>
 
                 <div class="row justify-content-center pt-4" post>
                     <div class="col-2">
                         <label for="nama_kategori" class="col-form-label">Nama Kategori</label>
                     </div>
                     <div class="col-3">
-                        <input type="text" id="nama_kategori" name="nama_kategori" class="form-control" required>
+                        <input type="text" id="nama_kategori" name="nama_kategori" class="form-control"
+                            value="<?= set_value('nama_kategori')?>">
+                        <?= form_error('nama_kategori', '<small class="text-danger pl-3">' ,'</small>'); ?>
                     </div>
+
                 </div>
 
                 <div class="row justify-content-center pt-2">
@@ -21,7 +23,9 @@
                         <label for="deskripsi" class="col-form-label">Deskripsi</label>
                     </div>
                     <div class="col-3">
-                        <input id="deskripsi" name="deskripsi" class="form-control" required>
+                        <input id="deskripsi" name="deskripsi" class="form-control"
+                            value="<?= set_value('deskripsi')?>">
+                        <?= form_error('deskripsi', '<small class="text-danger pl-3">','</small>'); ?>
                     </div>
                 </div>
 

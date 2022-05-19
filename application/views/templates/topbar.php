@@ -45,7 +45,9 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-bell fa-fw"></i>
                         <!-- Counter - Alerts -->
-                        <span class="badge badge-danger badge-counter">3+</span>
+                        <span
+                            class="badge badge-danger badge-counter"><?php $habisTotal = $expired + $habis + $hampir_habis + $hampir_exp ; if ($habisTotal > 0) echo $habisTotal ?>
+                        </span>
                     </a>
                     <!-- Dropdown - Alerts -->
                     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -53,41 +55,59 @@
                         <h6 class="dropdown-header">
                             Notifikasi
                         </h6>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+
+                        <a class="dropdown-item d-flex align-items-center"
+                            href="<?= base_url('user/tabel_kedaluwarsa')?>">
                             <div class="mr-3">
-                                <div class="icon-circle bg-primary">
-                                    <i class="fas fa-file-alt text-white"></i>
+                                <div class="icon-circle bg-warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </div>
                             </div>
                             <div>
-                                <div class="small text-gray-500">April 05, 2022</div>
-                                <span class="font-weight-bold">8 Obat yang akan segera kadaluarsa!</span>
+                                <div class="small text-gray-500"><?= date('j F Y'); ?></div>
+                                <span class="font-weight-bold"><strong><?php echo $hampir_exp ?></strong> Obat akan
+                                    segera Kedaluwarsa!</span>
                             </div>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="<?= base_url('user/tabel_stok')?>">
                             <div class="mr-3">
-                                <div class="icon-circle bg-primary">
-                                    <i class="fas fa-file-alt text-white"></i>
+                                <div class="icon-circle bg-warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </div>
                             </div>
                             <div>
-                                <div class="small text-gray-500">April 01, 2022</div>
-                                <span class="font-weight-bold">5 Obat yang sudah kadaluarsa!</span>
+                                <div class="small text-gray-500"><?= date('j F Y'); ?></div>
+                                <span class="font-weight-bold"><?php echo $hampir_habis ?> Obat akan segera habis
+                                    Stok!</span>
                             </div>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center"
+                            href="<?= base_url('user/tabel_kedaluwarsa')?>">
                             <div class="mr-3">
-                                <div class="icon-circle bg-primary">
-                                    <i class="fas fa-file-alt text-white"></i>
+                                <div class="icon-circle bg-warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </div>
                             </div>
                             <div>
-                                <div class="small text-gray-500">April 10, 2022</div>
-                                <span class="font-weight-bold">10 Obat yang akan segera Habis Stok!</span>
+                                <div class="small text-gray-500"><?= date('j F Y'); ?></div>
+                                <span class="font-weight-bold"><?php echo $expired ?> Obat yang sudah
+                                    Kedaluwarsa!</span>
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="<?= base_url('user/tabel_stok')?>">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500"><?= date('j F Y'); ?></div>
+                                <span class="font-weight-bold"><?php echo $habis ?> Obat sudah habis stok!</span>
                             </div>
                         </a>
 
-                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+
+                        <!-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> -->
                     </div>
                 </li>
 
@@ -104,11 +124,6 @@
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                         aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Profile
-                        </a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?= base_url('auth/logout')?>" data-toggle="modal"
                             data-target="#logoutModal">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
