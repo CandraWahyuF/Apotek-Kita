@@ -144,36 +144,36 @@ class Data_apotek extends CI_Model
     }
 
     // total pembelian
-    function total_beli(){       
-       $q = "SELECT *, SUM(tb_pembelian.subtotal) as 'totalAll' FROM tb_pembelian ";
+    // function total_beli(){       
+    //    $q = "SELECT *, SUM(tb_pembelian.subtotal) as 'totalAll' FROM tb_pembelian ";
 
-        $run_q = $this->db->query($q);
+    //     $run_q = $this->db->query($q);
 
-        if ($run_q->num_rows() > 0) {
-            foreach ($run_q->result() as $get) {
-                return $get->totalAll;
-            }
-        }
-        else {
-            return FALSE;
-        }  
-    }
+    //     if ($run_q->num_rows() > 0) {
+    //         foreach ($run_q->result() as $get) {
+    //             return $get->totalAll;
+    //         }
+    //     }
+    //     else {
+    //         return FALSE;
+    //     }  
+    // }
 
-    // total penjualan 
-    function total_jual(){       
-       $q = "SELECT *, SUM(tb_penjualan.subtotal) as 'totalAll' FROM tb_penjualan";
+    // // total penjualan 
+    // function total_jual(){       
+    //    $q = "SELECT *, SUM(tb_penjualan.subtotal) as 'totalAll' FROM tb_penjualan";
 
-        $run_q = $this->db->query($q);
+    //     $run_q = $this->db->query($q);
 
-        if ($run_q->num_rows() > 0) {
-            foreach ($run_q->result() as $get) {
-                return $get->totalAll;
-            }
-        }
-        else {
-            return FALSE;
-        }  
-    }
+    //     if ($run_q->num_rows() > 0) {
+    //         foreach ($run_q->result() as $get) {
+    //             return $get->totalAll;
+    //         }
+    //     }
+    //     else {
+    //         return FALSE;
+    //     }  
+    // }
 
     // JOIN TABEL
 
@@ -427,35 +427,35 @@ class Data_apotek extends CI_Model
     }
 
 
-    // function count_totalbeli(){       
-    //    $q = "SELECT *, SUM(tb_pembelian.subtotal) as 'totalTrans' FROM tb_pembelian ";
+    function count_totalbeli(){       
+       $q = "SELECT *, SUM(tb_pembelian.subtotal) as 'totalTrans' FROM tb_pembelian ";
 
-    //     $run_q = $this->db->query($q);
+        $run_q = $this->db->query($q);
 
-    //     if ($run_q->num_rows() > 0) {
-    //         foreach ($run_q->result() as $get) {
-    //             return $get->totalTrans;
-    //         }
-    //     }
-    //     else {
-    //         return FALSE;
-    //     }  
-    // }
+        if ($run_q->num_rows() > 0) {
+            foreach ($run_q->result() as $get) {
+                return $get->totalTrans;
+            }
+        }
+        else {
+            return FALSE;
+        }  
+    }
 
-    // function count_totaljual(){       
-    //    $q = "SELECT *, SUM(tb_penjualan.subtotal) as 'totalTrans' FROM tb_penjualan";
+    function count_totaljual(){       
+       $q = "SELECT *, SUM(tb_penjualan.subtotal) as 'totalTrans' FROM tb_penjualan";
 
-    //     $run_q = $this->db->query($q);
+        $run_q = $this->db->query($q);
 
-    //     if ($run_q->num_rows() > 0) {
-    //         foreach ($run_q->result() as $get) {
-    //             return $get->totalTrans;
-    //         }
-    //     }
-    //     else {
-    //         return FALSE;
-    //     }  
-    // }
+        if ($run_q->num_rows() > 0) {
+            foreach ($run_q->result() as $get) {
+                return $get->totalTrans;
+            }
+        }
+        else {
+            return FALSE;
+        }  
+    }
 
     function get_gabung($tahun_beli){
         

@@ -57,8 +57,8 @@ $(document).ready(function() {
 <script src="<?= base_url('assets/');?>vendor/moment/min/moment.min.js">
 </script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css" />
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script> -->
 <script src="<?= base_url('assets/');?>vendor/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js">
 </script>
 

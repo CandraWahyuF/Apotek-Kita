@@ -39,7 +39,7 @@
                         <table id="penjualan" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center">Obat yang dibeli</th>
+                                    <th style="text-align: center">Obat yang dijual</th>
                                     <th style="text-align: center">Sisa Stok</th>
                                     <th style="text-align: center">Kategori</th>
                                     <th style="text-align: center">Harga</th>
