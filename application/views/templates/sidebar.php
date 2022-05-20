@@ -92,11 +92,22 @@
         </div>
     </li>
 
-    <!-- Nav Item - Charts -->
+
+    <!-- Menu LAPORAN -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('user/tabel_laporan')?>">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLaporan"
+            aria-expanded="true" aria-controls="collapseLaporan">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Laporan</span></a>
+            <span>Laporan</span>
+        </a>
+        <div id="collapseLaporan" class="collapse" aria-labelledby="headingLaporan" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?= base_url('laporan_controller/laporan_penjualan')?>">Laporan
+                    Penjualan</a>
+                <a class="collapse-item" href="<?= base_url('laporan_controller/laporan_pembelian')?>"> Laporan
+                    Pembelian</a>
+            </div>
+        </div>
     </li>
 
     <!-- Divider -->

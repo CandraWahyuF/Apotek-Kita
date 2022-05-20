@@ -14,6 +14,7 @@ class User extends CI_Controller
         $this->load->model('Data_apotek');
         $this->load->library('form_validation');
         $this->load->library('session');
+        $this->load->library('table');
 
         $data['habis'] = $this->Data_apotek->countstock();
         $data['expired'] = $this->Data_apotek->countexp();
@@ -94,6 +95,24 @@ class User extends CI_Controller
     }
 
             // Tabel kedaluwarsa
+    //coba laporan baru
+    // public function lihat_laporan_penjualan()
+    // {
+    //     $data['title'] = 'Laporan Penjualan Bulanan';
+    //     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+    //     $bulan=$this->input->post('bulan');
+    //     $tahun=$this->input->post('tahun');
+    //     $bulantahun=$bulan.$tahun;
+    //     $data['lap_jual'] = $this->db->query("SELECT * form tb_penjualan where tgl_beli='$bulantahun' ORDER BY id_jual ASC")->result();
+
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('templates/sidebar', $data);
+    //     $this->load->view('templates/topbar', $data);
+    //     $this->load->view('user/laporan_penjualan', $data);
+    //     $this->load->view('templates/footer');
+    // }
+    
     public function tabel_laporan()
     {
         $data['title'] = 'Rekapitulasi Bulanan';

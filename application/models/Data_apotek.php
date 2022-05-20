@@ -52,7 +52,7 @@ class Data_apotek extends CI_Model
 
         $this->db->insert('tb_pemasok', $data);
     }
-
+ 
 
     // GET HIDDEN ID untuk ubah data
     public function getObat($id){
@@ -458,10 +458,9 @@ class Data_apotek extends CI_Model
     }
 
     function get_gabung($tahun_beli){
-        
-       $query = $this->db->query("SELECT m.month_name as month, 
-                   i.total_inv, 
-                   p.total_pur
+        $query = $this->db->query("SELECT m.month_name as month, 
+                i.total_inv, 
+                p.total_pur
                 FROM month m
                 LEFT JOIN (SELECT MONTH(tgl_beli) as month, 
                             SUM(subtotal) as total_inv  
@@ -473,7 +472,7 @@ class Data_apotek extends CI_Model
                             FROM  tb_pembelian 
                             WHERE YEAR(tgl_beli)= '$tahun_beli'
                             GROUP BY month) p ON (m.month_num = p.month )
-                ORDER BY m.month_num");
+                            ORDER BY m.month_num");
         
         $hasil = array();
         
@@ -493,12 +492,12 @@ class Data_apotek extends CI_Model
     function get_total($tahun_beli){       
          $query = $this->db->query("SELECT *, (SELECT *, 
                             SUM(subtotal) as total_inv  
-                            FROM table_invoice
+                            FROM tb_penjualan
                             WHERE YEAR(tgl_beli)= '2021'
                             )  
                 LEFT JOIN (SELECT *, 
                             SUM(subtotal) as total_pur
-                            FROM  table_purchase 
+                            FROM  tb_pembelian 
                             WHERE YEAR(tgl_beli)= '2021'
                             )  
                 ");
@@ -559,4 +558,18 @@ class Data_apotek extends CI_Model
             return $run_q;
     }
 
+
+    // LAPORAN MODEL BARU
+    function laporan_penjualan()
+    {
+        $this->db->select('*');
+            
+            $this->db->select_sum('tb_penjualan.banyak');
+        
+            $this->db->group_by('ref');
+            $this->db->order_by ('tgl_beli', 'DESC');
+
+            $run_q = $this->db->get('tb_penjualan');
+            return $run_q;
+    }
 }
