@@ -179,6 +179,7 @@ function updateSubtotalp() {
 
         if (unitCount > unitStock) {
             $row.find('.banyak').val(unitStock);
+            alert("PERINGATAN ! PENJUALAN MELEBIHI SISA STOK");
             updateSubtotalp();
         } else if (unitCount < 0) {
             $row.find('.banyak').val(0);
