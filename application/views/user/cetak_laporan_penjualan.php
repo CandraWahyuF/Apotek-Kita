@@ -8,35 +8,37 @@
     <hr class="sidebar-divider">
 
     <div class="row table-responsive">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped" id="table">
             <tr>
                 <th>No Referensi</th>
                 <th>Nama Pembeli</th>
+                <th>Nama Obat</th>
                 <th>Tanggal Transaksi</th>
                 <th>Banyak</th>
                 <th>Grandtotal</th>
             </tr>
 
             <?php 
-            $total2=0;
+            $subtotal=0;
             foreach( $datafilter as $data) : ?>
             <tr>
                 <td><?= $data->ref; ?></td>
                 <td><?= $data->nama_pembeli; ?></td>
+                <td><?= $data->nama_obat; ?></td>
                 <td><?= date('j F Y',strtotime($data->tgl_beli)); ?></td>
                 <td><?= $data->banyak; ?></td>
-                <td>Rp <?= number_format($data->grandtotal); ?></td>
+                <td>Rp <?= number_format($data->subtotal); ?></td>
             </tr>
             <?php endforeach; ?>
-            <?php 
-                $total2 += $data->grandtotal;
-            ?>
+
+            <!-- <?php $subtotal += $data->subtotal;?>
             <tr>
-                <td style="text-align:center; vertical-align: middle" colspan="4"><b>TOTAL</b></b></td>
-                <td>
-                    <b>Rp <?php echo number_format($total2) ?></b>
+                <td style="text-align:center; vertical-align: middle" colspan="5"><b>
+                        Total</b></td>
+                <td id="val">
+                    <b>aaa</b>
                 </td>
-            </tr>
+            </tr> -->
         </table>
     </div>
 
@@ -48,5 +50,4 @@
 
         </div>
     </div>
-
 </div>

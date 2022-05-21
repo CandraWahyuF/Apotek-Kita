@@ -514,7 +514,7 @@ class Data_apotek extends CI_Model
                 );
             }
             return $hasil;
-    }
+    } 
 
     // NOTA
     function show_data($where, $table){      

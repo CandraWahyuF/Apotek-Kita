@@ -31,7 +31,14 @@ class Laporan_model extends CI_Model {
         $query = $this->db->query("SELECT * from tb_penjualan where YEAR(tgl_beli) = '$tahun2' ORDER BY tgl_beli ASC");
 
         return $query->result();
-    }   
+    }  
+
+    // function show_invoice($table){      
+    //     $this->db->select('*');
+    //     $this->db->select_sum('grandtotal');
+    //         $run_q = $this->db->get_where($table);
+    //     return $run_q;
+    // }
 
 
     // PEMBELIAN

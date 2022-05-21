@@ -38,6 +38,7 @@ class Laporan_controller extends CI_Controller {
         $data['title'] = 'Laporan Penjualan Bulanan';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
+        // $data['sumJual'] = $this->Laporan_model->show_invoice('tb_penjualan')->result();
         $tanggalawal = $this->input->post('tanggalawal');
         $tanggalakhir = $this->input->post('tanggalakhir');
         $tahun1 = $this->input->post('tahun1');
@@ -129,7 +130,7 @@ class Laporan_controller extends CI_Controller {
             $data['judul'] = "Laporan Pembelian PerTahun";
             $data['datafilter'] = $this->Laporan_model->filterbytahun_beli($tahun2);
             $data['subjudul'] = 'Tahun : ' .$tahun2;
-            
+             
             $this->load->view('templates/header', $data);
             $this->load->view('user/cetak_laporan_pembelian', $data);
             $this->load->view('templates/footer');

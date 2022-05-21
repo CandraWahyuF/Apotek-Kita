@@ -12,6 +12,7 @@
             <tr>
                 <th>No Referensi</th>
                 <th>Nama Pemasok</th>
+                <th>Nama Obat</th>
                 <th>Tanggal Transaksi</th>
                 <th>Banyak</th>
                 <th>Grandtotal</th>
@@ -23,12 +24,13 @@
             <tr>
                 <td><?= $data->ref; ?></td>
                 <td><?= $data->nama_pemasok; ?></td>
+                <td><?= $data->nama_obat; ?></td>
                 <td><?= date('j F Y',strtotime($data->tgl_beli)); ?></td>
                 <td><?= $data->banyak; ?></td>
-                <td>Rp <?= number_format($data->grandtotal); ?></td>
+                <td>Rp <?= number_format($data->subtotal); ?></td>
             </tr>
             <?php endforeach; ?>
-            <?php 
+            <!-- <?php 
                 $total2 += $data->grandtotal;
             ?>
             <tr>
@@ -36,7 +38,7 @@
                 <td>
                     <b>Rp <?php echo number_format($total2) ?></b>
                 </td>
-            </tr>
+            </tr> -->
         </table>
     </div>
 
